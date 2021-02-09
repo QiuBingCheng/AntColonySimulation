@@ -11,7 +11,7 @@ import numpy as np
 from collections import OrderedDict 
 import random
 import time
-from abc import ABC, abstractmethod
+from numpy.random import choice
 #%%
 class Color:
     BLUE = (0,0,255)
@@ -70,7 +70,8 @@ class Ant():
     all_ant = []
     max_steps = 50
     all_directions = []
-    
+    #0.1機率往-45度走 0.8機率直走 0.1往45度走
+    proba_direction = [0.1,.8, 0.1]
     @staticmethod
     def add_ant(ant):
         Ant.all_ant.append(ant)
@@ -108,8 +109,18 @@ class Ant():
         self.path = [""]*Ant.max_steps
         Ant.add_ant(self)
         self._id = len(Ant.all_ant)
-    
+        
     def get_new_pos(self):
+        if(self.role == "seeker"):
+            ant.change_direction()
+            self._seeker_get_new_pos()
+        else:
+            pass
+            self.path[self.step]
+        
+        self.image = self.images[self.direction]
+        
+    def _seeker_get_new_pos(self):
         if(self.direction == "up"):
             new_left = self.position[0]
             new_top = self.position[1] -Ant.size[1]
@@ -144,62 +155,45 @@ class Ant():
         
         return new_left,new_top
     
-    def change_direction(self):
-        if(self.direction == "up"):
-            self.direction = "upper_left" if random.random()>0.5 else "upper_right"
-            self.image = self.images[self.direction]
+    def decide_new_direction(self,peripheral_probability):
+        #if collided with border/nest change direction
+        #+- 45c
+        index = Ant.all_directions.index(self.direction)
+        last  = Ant.all_directions[index-1]
+        next_ = Ant.all_directions[index+1] if index==len(Ant.all_directions)-1 else Ant.all_directions[0]
+        self.direction = choice(a=[last,self.direction,next_],p=[0.1,0.8,0.1])
             
-        elif(self.direction == "upper_right"):
-            self.direction = "up" if random.random()>0.5 else "right"
-            self.image = self.images[self.direction]    
-         
-        elif(self.direction == "right"):
-            self.direction = "upper_right" if random.random()>0.5 else "lower_right"
-            self.image = self.images[self.direction] 
             
-        elif(self.direction == "lower_right"):
-            self.direction = "right" if random.random()>0.5 else "down"
-            self.image = self.images[self.direction]     
-            
-        elif(self.direction == "down"):
-            self.direction = "lower_right" if random.random()>0.5 else "lower_left"
-            self.image = self.images[self.direction]  
-            
-        elif(self.direction == "lower_left"):
-            self.direction = "down" if random.random()>0.5 else "left"
-            self.image = self.images[self.direction] 
-         
-        elif(self.direction == "left"):
-            self.direction = "lower_left" if random.random()>0.5 else "upper_left"
-            self.image = self.images[self.direction] 
-            
-        elif(self.direction == "upper_left"):
-            self.direction = "left" if random.random()>0.5 else "up"
-            self.image = self.images[self.direction] 
-            
-    def move(self,pos):        
+    def move(self,peripheral_probability): 
+        #self.decide_new_direction()
         self.position = pos
         self.rect = self.image.get_rect(topleft=self.position)
-        self.path[self.step] = (self.position,self.direction)
-        self.step += 1
-        if(self.step == Ant.max_steps):
-            self.role = "return"
-         
+        if(self.role == "seeker"):
+            self.path[self.step] = (self.position,self.direction)
+            self.step += 1
+            if(self.step == Ant.max_steps):
+                self.role = "return"
+                self.step = -1
+        
 class Map:
     screen = None
     right = 0
     bottom = 0
+    peripheral_probability = [0]*8
     
     @staticmethod
     def set_screen(screen):
         Map.screen = screen
+        
     @staticmethod    
     def draw_image(image,rect):
-        Map.screen.blit(image, rect)       
+        Map.screen.blit(image, rect)   
+        
     @staticmethod
     def draw_line(color,size,pos):
         pygame.draw.line(Map.screen,color,size,pos)
         pygame.display.flip()
+        
     @staticmethod
     def draw_rect(color,rect):
          pygame.draw.rect(Map.screen,color,rect)
@@ -216,6 +210,33 @@ class Map:
             return True
         else:
             return False
+        
+    @staticmethod    
+    def get_peripheral_probability(pos):
+         #螞蟻朝外圍八格的行走機率
+         #若有障礙物則0
+        index = 0
+        for i in range(3):
+            top = (pos[0]-Ant.height)*Ant.height*i
+            for j in range(3):
+                if(i==j==1):continue
+                left = (pos[0]-Ant.width)*Ant.width*i
+                p = (left,top)
+                if(Map._is_allowed_to_pass(p)):
+                    Map.peripheral_probability[index] = 1
+                else:
+                    Map.peripheral_probability[index] = 0
+                 
+                index += 1
+                
+    @staticmethod            
+    def  _is_allowed_to_pass(pos):
+         if(Food.collided_with_Food(pos) or 
+            Nest.rect.collidepoint(pos) or
+            Map.is_outside_border(pos)):
+             return False
+         return True
+      
         
 class Button():
     def __init__(self,position,size,image,callback):
@@ -381,18 +402,9 @@ def main():
        
         if (IS_START and (end-current_time>0.5)):
             for ant in Ant.all_ant:
-                if(ant.step%5==0):
-                    ant.change_direction()
-                pos = ant.get_new_pos()
-                while(Food.collided_with_Food(pos) or 
-                      Nest.rect.collidepoint(pos) or
-                      Map.is_outside_border(pos)):
-                    ant.change_direction()
-                    pos = ant.get_new_pos()
-                
                 Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
                 Map.draw_rect(Color.TRACE_0,ant.rect)
-                ant.move(pos)
+                ant.move(Map.get_peripheral_probability(ant.position))
                 Map.draw_image(ant.image,ant.rect)
                 
             current_time = end
