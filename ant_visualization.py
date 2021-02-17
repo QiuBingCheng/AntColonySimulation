@@ -11,7 +11,7 @@ import numpy as np
 from collections import OrderedDict 
 import random
 import time
-from numpy.random import choice
+from debug import print_log
 #%%
 class Color:
     BLUE = (0,0,255)
@@ -25,34 +25,36 @@ class Color:
     
 class Nest:
     rect = None
-    @staticmethod 
-    def set_image(image,size):
-        Nest.size = size
-        Nest.image = pygame.transform.scale(image,size)
+    
+    @classmethod 
+    def set_image(cls,image,size):
+        cls.size = size
+        cls.image = pygame.transform.scale(image,size)
         
-    @staticmethod
-    def set_position(position):
-        Nest.position = position
-        Nest.rect = Nest.image.get_rect(topleft=position)
+    @classmethod
+    def set_position(cls,position):
+        cls.position = position
+        cls.rect = cls.image.get_rect(topleft=position)
         
          
 class Food():
     
     all_food = []
-    @staticmethod
-    def add_food(food):
-        Food.all_food.append(food)
-        
-    @staticmethod
-    def remove_all_food():
-        Food.all_food.clear()
     
-    @staticmethod 
-    def set_image(image,size):
-        Food.size = size
-        Food.image = pygame.transform.scale(image,size)
+    @classmethod
+    def add_food(cls,food):
+        cls.all_food.append(food)
         
-    @staticmethod    
+    @classmethod
+    def remove_all_food(cls):
+        cls.all_food.clear()
+    
+    @classmethod
+    def set_image(cls,image,size):
+        cls.size = size
+        cls.image = pygame.transform.scale(image,size)
+        
+    @staticmethod 
     def collided_with_Food(pos):  
         for food in Food.all_food:
             if(food.rect.collidepoint(pos)):
@@ -63,42 +65,66 @@ class Food():
     def __init__(self,position):
         self.position = position
         self.rect = self.image.get_rect(topleft=position)
-        Food.add_food(self)
      
     
 class Ant():
     all_ant = []
     max_steps = 50
-    all_directions = []
-    #0.1機率往-45度走 0.8機率直走 0.1往45度走
-    proba_direction = [0.1,.8, 0.1]
-    @staticmethod
-    def add_ant(ant):
-        Ant.all_ant.append(ant)
+    all_directions = ["upper_left","up","upper_right","right",
+                      "lower_right","down","lower_left","left"]
+    
+    probability_of_direction = {}
+    
+    #0.05機率往-45度走 0.8機率直走 0.05往45度走
+    @classmethod
+    def construct_proba_of_direction(cls):
+        cls.probability_of_direction["up"] = [0.05,0.8,0.05,0,0,0,0.05]
         
-    @staticmethod    
-    def remove_all_ant():
-        Ant.all_ant.clear()
+        length = len(Ant.all_directions)
+        for i in range(1,length):
+            proba = [0]*length
+            for j in range(0,i):
+                proba[j] = cls.probability_of_direction["up"][length-i+j]
+                
+            for k in range(i,length):
+                proba[k] = cls.probability_of_direction["up"][k-i]
+                
+            cls.probability_of_direction[Ant.all_directions[i]] = proba
+                     
+    @classmethod
+    def add_ant(cls,ant):
+        cls.all_ant.append(ant)
+        ant._id = len(cls.all_ant)
         
-    @staticmethod
+    @classmethod  
+    def remove_all_ant(cls):
+        cls.all_ant.clear()
+        
+    @classmethod
     def rev_dir(direction):
         index = Ant.all_directions.index(direction)
         return Ant.all_directions[(index+4)%8]
         
-    @staticmethod 
-    def set_image(up,down,left,right,
+    @classmethod
+    def set_image(cls,up,down,left,right,
                   upper_left,upper_right,lower_left,lower_right):
         
         Ant.images = {"up":up,"upper_right":upper_right,"right":right,"lower_right":lower_right,
                       "down":down,"upper_left":upper_left,"left":left,"lower_left":lower_left}
-        Ant.all_directions = list(Ant.images.keys())
+        
+        for d,img in Ant.images.items():
+            cls.images[d] = pygame.transform.scale(img,(cls.width,cls.height))     
     
     @staticmethod
-    def set_size(size):
-        Ant.size = size
-        for d,img in Ant.images.items():
-            Ant.images[d] = pygame.transform.scale(img,size)
-    
+    @print_log()
+    def _choice(a,p):
+        rand = random.random()*sum(p)
+        acc = 0
+        for i,ele in enumerate(p):
+            acc += ele
+            if(acc>=rand):
+                return a[i]
+            
     def __init__(self,position,direction):
         self.position = position
         self.direction = direction
@@ -107,87 +133,56 @@ class Ant():
         self.step = 0
         self.role = "seeker"
         self.path = [""]*Ant.max_steps
-        Ant.add_ant(self)
-        self._id = len(Ant.all_ant)
-        
-    def get_new_pos(self):
-        if(self.role == "seeker"):
-            ant.change_direction()
-            self._seeker_get_new_pos()
-        else:
-            pass
-            self.path[self.step]
-        
-        self.image = self.images[self.direction]
-        
-    def _seeker_get_new_pos(self):
-        if(self.direction == "up"):
-            new_left = self.position[0]
-            new_top = self.position[1] -Ant.size[1]
-        
-        elif(self.direction == "upper_right"):
-            new_left = self.position[0]+ Ant.size[0]
-            new_top = self.position[1] -Ant.size[1] 
-           
-        elif(self.direction == "right"):
-            new_left = self.position[0]+ Ant.size[0]
-            new_top = self.position[1]
-        
-        elif(self.direction == "lower_right"):
-            new_left = self.position[0]+Ant.size[0]
-            new_top = self.position[1] +Ant.size[1]
+        self.current_proba_directions = Ant.probability_of_direction[direction]
+
             
-        elif(self.direction == "down"):
-            new_left = self.position[0]
-            new_top = self.position[1] + Ant.size[1]
-    
-        elif(self.direction == "lower_left"):
-            new_left = self.position[0] - Ant.size[0]
-            new_top = self.position[1] + Ant.size[1]   
-            
-        elif(self.direction == "left"):
-            new_left = self.position[0] - Ant.size[0]
-            new_top = self.position[1] 
-            
-        elif(self.direction == "upper_left"):
-            new_left = self.position[0]-Ant.size[0]
-            new_top = self.position[1] -Ant.size[1]
-        
-        return new_left,new_top
-    
-    def decide_new_direction(self,peripheral_probability):
+    @print_log()     
+    def _decide_new_direction(self,peripheral_probability):
+       
         #if collided with border/nest change direction
         #+- 45c
-        index = Ant.all_directions.index(self.direction)
-        last  = Ant.all_directions[index-1]
-        next_ = Ant.all_directions[index+1] if index==len(Ant.all_directions)-1 else Ant.all_directions[0]
-        self.direction = choice(a=[last,self.direction,next_],p=[0.1,0.8,0.1])
-            
-            
-    def move(self,peripheral_probability): 
-        #self.decide_new_direction()
-        self.position = pos
+        for i in range(len(Ant.all_directions)):
+            self.current_proba_directions[i] = Ant.probability_of_direction[self.direction][i]*peripheral_probability[i]
+    
+        return Ant._choice(a=Ant.all_directions,p=self.current_proba_directions)
+      
+        
+    @print_log()    
+    def _decide_new_position(self, peripheral_positions):
+         index = Ant.all_directions.index(self.direction)
+         return peripheral_positions[index] 
+     
+    @print_log()
+    def move(self,peripheral_positions,peripheral_probability): 
+        #print(peripheral_positions)
+       # print(peripheral_probability)
+        self.direction = self._decide_new_direction(peripheral_probability)
+        self.position = self._decide_new_position(peripheral_positions)
+        self.image = self.images[self.direction]
+      
         self.rect = self.image.get_rect(topleft=self.position)
+        
         if(self.role == "seeker"):
             self.path[self.step] = (self.position,self.direction)
             self.step += 1
             if(self.step == Ant.max_steps):
                 self.role = "return"
-                self.step = -1
-        
+                self.step = -1          
+    
 class Map:
     screen = None
     right = 0
     bottom = 0
     peripheral_probability = [0]*8
+    peripheral_positions = [0]*8
     
-    @staticmethod
-    def set_screen(screen):
-        Map.screen = screen
+    @classmethod
+    def set_screen(cls,screen):
+        cls.screen = screen
         
-    @staticmethod    
-    def draw_image(image,rect):
-        Map.screen.blit(image, rect)   
+    @classmethod    
+    def draw_image(cls,image,rect):
+        cls.screen.blit(image, rect)   
         
     @staticmethod
     def draw_line(color,size,pos):
@@ -197,46 +192,43 @@ class Map:
     @staticmethod
     def draw_rect(color,rect):
          pygame.draw.rect(Map.screen,color,rect)
-    
-    @staticmethod
-    def set_border(right,bottom):
-        Map.right = right
-        Map.bottom = bottom
-        
+
     @staticmethod
     def is_outside_border(point):
-        if(point[0]<0 or point[0]> Map.right or
-           point[1]<0 or point[1]> Map.bottom):
+        if(point[0]<0 or point[0]> Map.width or
+           point[1]<0 or point[1]> Map.height):
             return True
         else:
             return False
+    
         
-    @staticmethod    
-    def get_peripheral_probability(pos):
+    @classmethod
+    @print_log()    
+    def calculate_peripheral_probability(cls,pos):
          #螞蟻朝外圍八格的行走機率
          #若有障礙物則0
         index = 0
         for i in range(3):
-            top = (pos[0]-Ant.height)*Ant.height*i
+            top = (pos[1]-Ant.height)+Ant.height*i
             for j in range(3):
                 if(i==j==1):continue
-                left = (pos[0]-Ant.width)*Ant.width*i
+                left = (pos[0]-Ant.width)+Ant.width*j
                 p = (left,top)
+                cls.peripheral_positions[index] = p
                 if(Map._is_allowed_to_pass(p)):
-                    Map.peripheral_probability[index] = 1
+                    cls.peripheral_probability[index] = 1
                 else:
-                    Map.peripheral_probability[index] = 0
-                 
+                    cls.peripheral_probability[index] = 0
+                
                 index += 1
                 
-    @staticmethod            
+    @staticmethod           
     def  _is_allowed_to_pass(pos):
          if(Food.collided_with_Food(pos) or 
             Nest.rect.collidepoint(pos) or
             Map.is_outside_border(pos)):
              return False
          return True
-      
         
 class Button():
     def __init__(self,position,size,image,callback):
@@ -252,24 +244,25 @@ class Button():
             if self.rect.collidepoint(event.pos):
                 self.callback()
 #%%
+DEBUG = True
+
 #variable
-FOOD_WIDTH = 50
-FOOD_HEIGHT = 50
+Food.width = 50
+Food.height = 50
 
-NEST_WIDTH = 50
-NEST_HEIGHT = 50
+Nest.width = 50
+Nest.height = 50
 
-ANT_WIDTH = 10
-ANT_HEIGHT = 10
-ANTS_COUNT = 5
+Ant.width  = 10
+Ant.height = 10
+Ant.count = 2
 
-SCREEN = None
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 700
+Map.width = 800
+Map.height = 600
 
-MAP_WIDTH = 800
-MAP_HEIGHT = 600
-Map.set_border(MAP_WIDTH,MAP_HEIGHT)
+SCREEN_WIDTH = Map.width
+SCREEN_HEIGHT = Map.height+100
+
 IS_START = False
 current_time = 0
 DEFAULT_BG_COLOR = Color.WHITE
@@ -277,9 +270,9 @@ screen = None
 Map.screen = screen
 maps = []
 
-for w in range(int(MAP_WIDTH/FOOD_WIDTH)):
-    for h in range(int(MAP_HEIGHT/FOOD_HEIGHT)):
-        maps.append((w*FOOD_WIDTH,h*FOOD_HEIGHT))
+for w in range(int(Map.width/Food.width)):
+    for h in range(int(Map.height/Food.height)):
+        maps.append((w*Food.width,h*Food.height))
 #%%
 #resources
 random_map_img = pygame.image.load('image/random_map.png')
@@ -291,11 +284,11 @@ load_img = lambda path:pygame.image.load("image/ant2/"+path)
 
 Ant.set_image(load_img("up.png"),load_img("down.png"),load_img("left.png"),load_img("right.png"),
               load_img("upper_left.png"),load_img("upper_right.png"),load_img("lower_left.png"),load_img("lower_right.png"))
-Ant.set_size((ANT_WIDTH,ANT_HEIGHT))
+Ant.construct_proba_of_direction()
 
-Nest.set_image(nest_img,(NEST_WIDTH,NEST_HEIGHT))
+Nest.set_image(nest_img,(Nest.width,Nest.height))
 
-Food.set_image(food_img,(FOOD_WIDTH,FOOD_HEIGHT))
+Food.set_image(food_img,(Food.width,Food.height))
 #%%  
         
 def random_generate_map():
@@ -310,30 +303,32 @@ def random_generate_map():
      #food
     for pos in possible_positions:
         food = Food(pos)
+        Food.add_food(food)
         Map.draw_image(Food.image,food.rect)
     
     #ant
-    left = Nest.position[0]-ANT_HEIGHT
-    top = Nest.position[1]-ANT_WIDTH
-    right = Nest.position[0]+NEST_WIDTH
-    bottom = Nest.position[1]+NEST_HEIGHT
+    left = Nest.position[0]-Ant.height
+    top = Nest.position[1]-Ant.width
+    right = Nest.position[0]+Nest.width
+    bottom = Nest.position[1]+Nest.height
     
-    possible_positions = [(w,top) for w in range(left,right,ANT_WIDTH)]
-    possible_positions.extend([(w,bottom) for w in range(left,right,ANT_WIDTH)])
-    possible_positions.extend([(left,h) for h in range(top,bottom,ANT_HEIGHT)])
-    possible_positions.extend([(right,h) for h in range(top,bottom,ANT_HEIGHT)])
+    possible_positions = [(w,top) for w in range(left,right,Ant.width)]
+    possible_positions.extend([(w,bottom) for w in range(left,right,Ant.width)])
+    possible_positions.extend([(left,h) for h in range(top,bottom,Ant.height)])
+    possible_positions.extend([(right,h) for h in range(top,bottom,Ant.height)])
     
     possible_positions =  [
         pos for pos 
         in set(possible_positions)
-        if (Map.is_outside_border(pos)+Map.is_outside_border((pos[0],pos[1]+Ant.size[1]))==0)
+        if (Map.is_outside_border(pos)+Map.is_outside_border((pos[0],pos[1]+Ant.height))==0)
     ]
     
-    sample_count = min(len(possible_positions),ANTS_COUNT)
+    sample_count = min(len(possible_positions),Ant.count)
     ants_positions = random.sample(possible_positions,sample_count)
    
     for pos in ants_positions:  
         ant = Ant(pos,"up")
+        Ant.add_ant(ant)
         Map.draw_image(ant.image,ant.rect)
         
 def clear_map():
@@ -355,33 +350,27 @@ def start():
     global IS_START,current_time
     IS_START = True
     current_time = time.time()
-   
-def is_collide_point(pos):
-    if(pos[1]<=0 or pos[1]>=MAP_HEIGHT or pos[0]<=0 or pos[0]>=MAP_WIDTH):
-        return True
-    else:
-        return False
  
 def main():  
     global SCREEN,IS_START,current_time 
     
     pygame.init()
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    screen = pygame.display.set_mode((Map.width, Map.height+100))
     screen.fill(DEFAULT_BG_COLOR)
     Map.set_screen(screen)
     
     random_generate_map()
     
     #draw line
-    Map.draw_line(Color.SLATE_GREY, (0,MAP_HEIGHT), (SCREEN_WIDTH, MAP_HEIGHT))
+    Map.draw_line(Color.SLATE_GREY, (0,Map.height), (SCREEN_WIDTH, Map.height))
     
     #button
     ##ramdom map
-    random_map = Button((0,MAP_HEIGHT),(80,50),random_map_img,random_generate_map)
+    random_map = Button((0,Map.height),(80,50),random_map_img,random_generate_map)
     Map.draw_image(random_map.image,random_map.rect)
     
     ## start
-    start_btn = Button((random_map.position[0]+random_map.size[0],MAP_HEIGHT),
+    start_btn = Button((random_map.position[0]+random_map.size[0],Map.height),
                               (80,50),start_img,start)
     Map.draw_image(start_btn.image,start_btn.rect)
     
@@ -400,11 +389,12 @@ def main():
                 random_map.on_click(event)
                 start_btn.on_click(event) 
        
-        if (IS_START and (end-current_time>0.5)):
+        if (IS_START and (end-current_time>1)):
             for ant in Ant.all_ant:
                 Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
                 Map.draw_rect(Color.TRACE_0,ant.rect)
-                ant.move(Map.get_peripheral_probability(ant.position))
+                Map.calculate_peripheral_probability(ant.position)
+                ant.move(Map.peripheral_positions,Map.peripheral_probability)
                 Map.draw_image(ant.image,ant.rect)
                 
             current_time = end
