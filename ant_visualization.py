@@ -60,20 +60,25 @@ class Food():
     
     @classmethod
     def set_image(cls,image,size):
-        cls.size = size
         cls.image = pygame.transform.scale(image,size)
         
+    @staticmethod
+    def collided_with_empty_food(pos):
+        return food.size == 0 if collided_with_food(pos) else False 
+       
+    
     @staticmethod 
-    def collided_with_Food(pos):  
+    def collided_with_food(pos):  
         for food in Food.all_food:
             if(food.rect.collidepoint(pos)):
-                return True
+                return food
         else:
-            return False
+            return None
                     
     def __init__(self,position):
         self.position = position
         self.rect = self.image.get_rect(topleft=position)
+        self.size = 20
 
     
 class Ant():
@@ -81,7 +86,7 @@ class Ant():
     max_steps = 50
     probability_of_direction = {}
     images = {}
-    #0.05機率往-45度走 0.8機率直走 0.05往45度走
+   
     @classmethod
     def construct_proba_of_direction(cls):
         length = len(Direction)
@@ -150,14 +155,10 @@ class Ant():
         self.image = Ant.images[self.direction]
         self.position = peripheral_positions[index]
         self.rect = self.image.get_rect(topleft=self.position)
-        
-        if(self.role == "seeker"):
-            self.path[self.step] = (self.position,self.direction)
-            self.step += 1
-            if(self.step == Ant.max_steps):
-                self.role = "return"
-                self.step = -1          
-    
+        self.path[self.step] = (self.position,self.direction)
+        self.step += 1
+            
+           
 class Map:
     screen = None
     right = 0
@@ -245,7 +246,7 @@ class Map:
         
     @staticmethod           
     def  _is_allowed_to_pass(pos):
-         if(Food.collided_with_Food(pos) or 
+         if(Food.collided_with_empty_food(pos) or 
             Nest.rect.collidepoint(pos) or
             Map.is_outside_border(pos)):
              return False
@@ -409,12 +410,37 @@ def main():
        
         if (IS_START and (end-current_time>1)):
             for ant in Ant.all_ant:
-                Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
-                Map.draw_rect(Color.TRACE_0,ant.rect)
-                Map.calculate_peripheral_positions(ant.position)
-                Map.calculate_peripheral_probability()
-                ant.move(Map.peripheral_positions,Map.peripheral_probability)
-                Map.draw_image(ant.image,ant.rect)
+                if(ant.role == "seeker"):
+                    if(ant.action == "go"):
+                        Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
+                        Map.draw_rect(Color.TRACE_0,ant.rect)
+                        Map.calculate_peripheral_positions(ant.position)
+                        Map.calculate_peripheral_probability()
+                        ant.move(Map.peripheral_positions,Map.peripheral_probability)
+                        Map.draw_image(ant.image,ant.rect)
+                        
+                        collided_food = Food.collided_food(pos)
+                        if(collided_food):
+                            
+                                
+                                
+                            
+                        elif(ant.step == Ant.max_steps):
+                            ant.action = return
+                            
+                    elif(ant.action == "return"):
+                        pass
+                    
+                if(ant.role == "carrier"):
+                    if(ant.action == "go"):
+                        pass
+                    
+                    elif(ant.action == "return1"):
+                        pass
+                    
+                    elif(ant.action == "return2"):
+                        pass
+               
                 
             current_time = end
         pygame.display.update()
