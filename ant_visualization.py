@@ -64,9 +64,8 @@ class Food():
         
     @staticmethod
     def collided_with_empty_food(pos):
-        return food.size == 0 if collided_with_food(pos) else False 
+        return food.size == 0 if Food.collided_with_food(pos) else False 
        
-    
     @staticmethod 
     def collided_with_food(pos):  
         for food in Food.all_food:
@@ -83,7 +82,7 @@ class Food():
     
 class Ant():
     all_ant = []
-    max_steps = 50
+    max_steps = 10
     probability_of_direction = {}
     images = {}
    
@@ -134,17 +133,19 @@ class Ant():
             
             
     def __init__(self,start_pos,direction):
+        self.role = "seeker"
+        self.action = "go"
+        
         self.position = start_pos
         self.direction = direction
         self.image = self.images[direction]
         self.rect = self.image.get_rect(topleft=start_pos)
         self.step = 0
-        self.role = "seeker"
         self.path = [""]*Ant.max_steps
         self.current_proba_directions = Ant.probability_of_direction[direction]
             
     @print_log()
-    def move(self,peripheral_positions,peripheral_probability):
+    def random_move(self,peripheral_positions,peripheral_probability):
         
         #decide new direction
         for i in range(len(Direction)):
@@ -157,7 +158,16 @@ class Ant():
         self.rect = self.image.get_rect(topleft=self.position)
         self.path[self.step] = (self.position,self.direction)
         self.step += 1
-            
+        
+    @print_log()  
+    def reverse_move(self):
+        pos,direction = self.path[self.step]
+        
+        self.direction = Direction((Direction[direction].value+4)%len(Direction)).name
+        self.image = Ant.images[self.direction]
+        self.position = pos
+        self.rect = self.image.get_rect(topleft=self.position)
+        self.step += 1
            
 class Map:
     screen = None
@@ -416,21 +426,20 @@ def main():
                         Map.draw_rect(Color.TRACE_0,ant.rect)
                         Map.calculate_peripheral_positions(ant.position)
                         Map.calculate_peripheral_probability()
-                        ant.move(Map.peripheral_positions,Map.peripheral_probability)
+                        ant.random_move(Map.peripheral_positions,Map.peripheral_probability)
                         Map.draw_image(ant.image,ant.rect)
+                                    
+                        if(Food.collided_with_food(ant.position)):
+                            ant.role = "carrier"
+                            ant.action = "returner1"
+                            
+                        elif(ant.step == ant.max_steps):
+                            ant.step = (ant.step-1)*-1
+                            ant.action = "returner"
+                            
+                    elif(ant.action == "returner"):
+                        ant.reverse_move()
                         
-                        collided_food = Food.collided_food(pos)
-                        if(collided_food):
-                            
-                                
-                                
-                            
-                        elif(ant.step == Ant.max_steps):
-                            ant.action = return
-                            
-                    elif(ant.action == "return"):
-                        pass
-                    
                 if(ant.role == "carrier"):
                     if(ant.action == "go"):
                         pass
