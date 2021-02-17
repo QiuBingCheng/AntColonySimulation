@@ -6,13 +6,22 @@ Created on Wed Feb  3 15:45:02 2021
 """
 
 
-import sys, pygame
-import numpy as np
-from collections import OrderedDict 
+import sys, os,pygame
 import random
 import time
+from enum import Enum
 from debug import print_log
 #%%
+class Direction(Enum):
+    EAST = 0
+    SOUTHEAST = 1
+    SOUTH = 2
+    SOUTHWEST = 3
+    WEST = 4
+    NORTHWEST = 5
+    NORTH = 6
+    NORTHEAST = 7
+     
 class Color:
     BLUE = (0,0,255)
     RED = (255,0,0) 
@@ -65,32 +74,27 @@ class Food():
     def __init__(self,position):
         self.position = position
         self.rect = self.image.get_rect(topleft=position)
-     
+
     
 class Ant():
     all_ant = []
     max_steps = 50
-    all_directions = ["upper_left","up","upper_right","right",
-                      "lower_right","down","lower_left","left"]
-    
     probability_of_direction = {}
-    
+    images = {}
     #0.05機率往-45度走 0.8機率直走 0.05往45度走
     @classmethod
     def construct_proba_of_direction(cls):
-        cls.probability_of_direction["up"] = [0.05,0.8,0.05,0,0,0,0.05]
-        
-        length = len(Ant.all_directions)
-        for i in range(1,length):
+        length = len(Direction)
+        for item in Direction:
             proba = [0]*length
-            for j in range(0,i):
-                proba[j] = cls.probability_of_direction["up"][length-i+j]
-                
-            for k in range(i,length):
-                proba[k] = cls.probability_of_direction["up"][k-i]
-                
-            cls.probability_of_direction[Ant.all_directions[i]] = proba
-                     
+            proba[item.value] = .7
+            proba[item.value-1] = .1
+            proba[item.value+1 if item.value<length-1 else 0] = .1
+            proba[item.value-2] = .05
+            proba[item.value+2 if item.value<length-2 else length-item.value] = .05
+            cls.probability_of_direction[item.name] = proba
+        print(cls.probability_of_direction)
+        
     @classmethod
     def add_ant(cls,ant):
         cls.all_ant.append(ant)
@@ -106,60 +110,45 @@ class Ant():
         return Ant.all_directions[(index+4)%8]
         
     @classmethod
-    def set_image(cls,up,down,left,right,
-                  upper_left,upper_right,lower_left,lower_right):
-        
-        Ant.images = {"up":up,"upper_right":upper_right,"right":right,"lower_right":lower_right,
-                      "down":down,"upper_left":upper_left,"left":left,"lower_left":lower_left}
-        
-        for d,img in Ant.images.items():
-            cls.images[d] = pygame.transform.scale(img,(cls.width,cls.height))     
+    def set_image(cls,folder):
+        filesname = os.listdir(folder)
+        for file in filesname:
+            direction = file.split(".")[0]
+            image =  pygame.image.load(f"{folder}/{file}")
+            Ant.images[direction] = pygame.transform.scale(image,(cls.width,cls.height))    
     
     @staticmethod
     @print_log()
-    def _choice(a,p):
+    def _choice(p):
         rand = random.random()*sum(p)
         acc = 0
         for i,ele in enumerate(p):
             acc += ele
             if(acc>=rand):
-                return a[i]
+                return i
             
-    def __init__(self,position,direction):
-        self.position = position
+            
+    def __init__(self,start_pos,direction):
+        self.position = start_pos
         self.direction = direction
         self.image = self.images[direction]
-        self.rect = self.image.get_rect(topleft=position)
+        self.rect = self.image.get_rect(topleft=start_pos)
         self.step = 0
         self.role = "seeker"
         self.path = [""]*Ant.max_steps
         self.current_proba_directions = Ant.probability_of_direction[direction]
-
             
-    @print_log()     
-    def _decide_new_direction(self,peripheral_probability):
-       
-        #if collided with border/nest change direction
-        #+- 45c
-        for i in range(len(Ant.all_directions)):
-            self.current_proba_directions[i] = Ant.probability_of_direction[self.direction][i]*peripheral_probability[i]
-    
-        return Ant._choice(a=Ant.all_directions,p=self.current_proba_directions)
-      
-        
-    @print_log()    
-    def _decide_new_position(self, peripheral_positions):
-         index = Ant.all_directions.index(self.direction)
-         return peripheral_positions[index] 
-     
     @print_log()
-    def move(self,peripheral_positions,peripheral_probability): 
-        #print(peripheral_positions)
-       # print(peripheral_probability)
-        self.direction = self._decide_new_direction(peripheral_probability)
-        self.position = self._decide_new_position(peripheral_positions)
-        self.image = self.images[self.direction]
-      
+    def move(self,peripheral_positions,peripheral_probability):
+        
+        #decide new direction
+        for i in range(len(Direction)):
+            self.current_proba_directions[i] = Ant.probability_of_direction[self.direction][i]*peripheral_probability[i]
+
+        index = Ant._choice(p=self.current_proba_directions)
+        self.direction = Direction(index).name
+        self.image = Ant.images[self.direction]
+        self.position = peripheral_positions[index]
         self.rect = self.image.get_rect(topleft=self.position)
         
         if(self.role == "seeker"):
@@ -173,8 +162,8 @@ class Map:
     screen = None
     right = 0
     bottom = 0
-    peripheral_probability = [0]*8
-    peripheral_positions = [0]*8
+    peripheral_probability = [0]*len(Direction)
+    peripheral_positions = [0]*len(Direction)
     
     @classmethod
     def set_screen(cls,screen):
@@ -195,33 +184,65 @@ class Map:
 
     @staticmethod
     def is_outside_border(point):
-        if(point[0]<0 or point[0]> Map.width or
-           point[1]<0 or point[1]> Map.height):
+        if(point[0]<=0 or point[0]+Ant.width>= Map.width or
+           point[1]<=0 or point[1]+Ant.height>= Map.height):
             return True
         else:
             return False
     
+    @classmethod
+    @print_log()
+    def calculate_peripheral_positions(cls,pos):
+        #螞蟻朝外圍八格的行走機率
+        #若有障礙物則0
+        #east
+        left = pos[0]+Ant.width
+        top = pos[1]
+        cls.peripheral_positions[Direction.EAST.value] = (left,top)
+      
+        #south east
+        left = pos[0]+Ant.width
+        top = pos[1]+Ant.height
+        cls.peripheral_positions[Direction.SOUTHEAST.value] = (left,top)
+        
+        #south
+        left = pos[0]
+        top = pos[1]+Ant.height
+        cls.peripheral_positions[Direction.SOUTH.value] = (left,top)      
+        
+        #south west
+        left = pos[0]-Ant.width
+        top = pos[1]+Ant.height
+        cls.peripheral_positions[Direction.SOUTHWEST.value] = (left,top)
+            
+        #west
+        left = pos[0]-Ant.width
+        top = pos[1]
+        cls.peripheral_positions[Direction.WEST.value] = (left,top)     
+        
+        #north west
+        left = pos[0]-Ant.width
+        top = pos[1]-Ant.height
+        cls.peripheral_positions[Direction.NORTHWEST.value] = (left,top)
+            
+        #NORTH
+        left = pos[0]
+        top = pos[1]-Ant.height
+        cls.peripheral_positions[Direction.NORTH.value] = (left,top)
+        
+        #NORTH east
+        left = pos[0]+Ant.width
+        top = pos[1]-Ant.height
+        cls.peripheral_positions[Direction.NORTHEAST.value] = (left,top)
         
     @classmethod
     @print_log()    
-    def calculate_peripheral_probability(cls,pos):
-         #螞蟻朝外圍八格的行走機率
-         #若有障礙物則0
-        index = 0
-        for i in range(3):
-            top = (pos[1]-Ant.height)+Ant.height*i
-            for j in range(3):
-                if(i==j==1):continue
-                left = (pos[0]-Ant.width)+Ant.width*j
-                p = (left,top)
-                cls.peripheral_positions[index] = p
-                if(Map._is_allowed_to_pass(p)):
-                    cls.peripheral_probability[index] = 1
-                else:
-                    cls.peripheral_probability[index] = 0
-                
-                index += 1
-                
+    def calculate_peripheral_probability(cls):
+        #螞蟻朝外圍八格的行走機率
+        #若有障礙物則0
+        for d,pos in enumerate(cls.peripheral_positions):
+            cls.peripheral_probability[d] = 1 if(Map._is_allowed_to_pass(pos)) else 0
+        
     @staticmethod           
     def  _is_allowed_to_pass(pos):
          if(Food.collided_with_Food(pos) or 
@@ -255,7 +276,7 @@ Nest.height = 50
 
 Ant.width  = 10
 Ant.height = 10
-Ant.count = 2
+Ant.count = 5
 
 Map.width = 800
 Map.height = 600
@@ -280,10 +301,7 @@ start_img = pygame.image.load("image/start.png")
 nest_img = pygame.image.load("image/nest.png")
 food_img = pygame.image.load("image/fruit.png")
 
-load_img = lambda path:pygame.image.load("image/ant2/"+path)
-
-Ant.set_image(load_img("up.png"),load_img("down.png"),load_img("left.png"),load_img("right.png"),
-              load_img("upper_left.png"),load_img("upper_right.png"),load_img("lower_left.png"),load_img("lower_right.png"))
+Ant.set_image("image/ant2")
 Ant.construct_proba_of_direction()
 
 Nest.set_image(nest_img,(Nest.width,Nest.height))
@@ -327,7 +345,7 @@ def random_generate_map():
     ants_positions = random.sample(possible_positions,sample_count)
    
     for pos in ants_positions:  
-        ant = Ant(pos,"up")
+        ant = Ant(pos,Direction.NORTH.name)
         Ant.add_ant(ant)
         Map.draw_image(ant.image,ant.rect)
         
@@ -393,7 +411,8 @@ def main():
             for ant in Ant.all_ant:
                 Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
                 Map.draw_rect(Color.TRACE_0,ant.rect)
-                Map.calculate_peripheral_probability(ant.position)
+                Map.calculate_peripheral_positions(ant.position)
+                Map.calculate_peripheral_probability()
                 ant.move(Map.peripheral_positions,Map.peripheral_probability)
                 Map.draw_image(ant.image,ant.rect)
                 
