@@ -30,6 +30,7 @@ class Color:
     TRANSPARENT = (0, 0, 0, 0)
     TRACE_1 =  (204,255,255) #light blue
     TRACE_2 = (255,99,71) #TOMATO
+    
 class Nest:
     rect = None
     
@@ -350,7 +351,7 @@ Nest.height = 50
 Ant.width  = 10
 Ant.height = 10
 Ant.count = 3
-Ant.max_steps = 50
+Ant.max_steps = 100
 
 Map.width = 800
 Map.height = 600
@@ -492,7 +493,7 @@ def main():
                         ant.random_move(Map.peripheral_positions,Map.peripheral_probability)
                         Map.draw_image(ant.image,ant.rect)
                         
-                        food = Food.collided_with_food(pos=ant.position,enlarged_scope=Ant.width)
+                        food = Food.collided_with_food(pos=ant.position,enlarged_scope=2*Ant.width)
                         if(food):
                             ant.role = "carrier"
                             ant.action = "returner1"
@@ -511,7 +512,7 @@ def main():
                         if (ant.has_arrived_at_nest()):     
                             ant.action = "go"
                             
-                if(ant.role == "carrier"):
+                elif(ant.role == "carrier"):
                     if(ant.action == "go"):
                         Map.draw_rect(Color.TRACE_2,ant.rect)
                         ant.move_to_food()
@@ -522,7 +523,7 @@ def main():
                                 ant.action == "returner2"
                             else:
                                 ant.food.size -= 1
-                                ant.action == "returner1"
+                                ant.action = "returner1"
                     
                     elif(ant.action == "returner1"):
                         Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
