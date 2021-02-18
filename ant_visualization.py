@@ -4,8 +4,6 @@ Created on Wed Feb  3 15:45:02 2021
 
 @author: Jerry
 """
-
-
 import sys, os,pygame
 import random
 import time
@@ -87,7 +85,9 @@ class Food():
         self.position = position
         self.rect = self.image.get_rect(topleft=position)
         self.size = 20
-
+    
+    def is_empty(self):
+        return self.size == 0
     
 class Ant():
     all_ant = []
@@ -225,6 +225,7 @@ class Ant():
         self.current_step -= 1
     
     def move_to_food(self):
+        #carrier move to find food along with same way
         pos,direction = self.path[self.current_step]
         self.direction = direction
         self.position = pos
@@ -480,7 +481,7 @@ def main():
                 random_map.on_click(event)
                 start_btn.on_click(event) 
        
-        if (IS_START and (end-current_time>1)):
+        if (IS_START and (end-current_time>0.5)):
             for ant in Ant.all_ant:
                 if(ant.role == "seeker"):
                     if(ant.action == "go"):
@@ -490,10 +491,12 @@ def main():
                         Map.calculate_peripheral_probability()
                         ant.random_move(Map.peripheral_positions,Map.peripheral_probability)
                         Map.draw_image(ant.image,ant.rect)
-                                    
-                        if(Food.collided_with_food(pos=ant.position,enlarged_scope=Ant.width)):
+                        
+                        food = Food.collided_with_food(pos=ant.position,enlarged_scope=Ant.width)
+                        if(food):
                             ant.role = "carrier"
                             ant.action = "returner1"
+                            ant.food  = food
                             
                         elif(ant.has_reached_maximum_step()):
                             ant.action = "returner"
@@ -510,12 +513,16 @@ def main():
                             
                 if(ant.role == "carrier"):
                     if(ant.action == "go"):
-                        Map.draw_rect(Color.TRACE_1,ant.rect)
+                        Map.draw_rect(Color.TRACE_2,ant.rect)
                         ant.move_to_food()
                         Map.draw_image(ant.image,ant.rect)
                         
-                        if(has_arrived_at_food):
-                            ant.action == "returner1"
+                        if(ant.has_arrived_at_food):
+                            if(ant.food.is_empty()):
+                                ant.action == "returner2"
+                            else:
+                                ant.food.size -= 1
+                                ant.action == "returner1"
                     
                     elif(ant.action == "returner1"):
                         Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
@@ -523,7 +530,7 @@ def main():
                         ant.reverse_move()
                         Map.draw_image(ant.image,ant.rect)
                         
-                        if (ant.step == -1):     
+                        if (ant.has_arrived_at_nest()):     
                             ant.action = "go"
                             
                     elif(ant.action == "return2"):
