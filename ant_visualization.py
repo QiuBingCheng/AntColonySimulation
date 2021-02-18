@@ -30,8 +30,8 @@ class Color:
     YELLOW = (255,255,0) 
     SLATE_GREY = (112,128,144)
     TRANSPARENT = (0, 0, 0, 0)
-    TRACE_0 =  (204,255,255) #light blue
-    
+    TRACE_1 =  (204,255,255) #light blue
+    TRACE_2 = (255,99,71) #TOMATO
 class Nest:
     rect = None
     
@@ -64,12 +64,21 @@ class Food():
         
     @staticmethod
     def collided_with_empty_food(pos):
-        return food.size == 0 if Food.collided_with_food(pos) else False 
+        food = Food.collided_with_food(pos)
+        if(food and food.size == 0):
+            return True
+        else:
+            return False
        
     @staticmethod 
-    def collided_with_food(pos):  
+    def collided_with_food(pos,enlarged_scope=None):  
         for food in Food.all_food:
-            if(food.rect.collidepoint(pos)):
+            rect = food.rect
+            if enlarged_scope:
+                rect = pygame.Rect(food.rect.left-enlarged_scope, food.rect.top-enlarged_scope,
+                                   food.rect.width+enlarged_scope,food.rect.height+enlarged_scope)
+                
+            if(rect.collidepoint(pos)):
                 return food
         else:
             return None
@@ -82,8 +91,8 @@ class Food():
     
 class Ant():
     all_ant = []
-    max_steps = 10
-    probability_of_direction = {}
+    max_steps = 5
+    default_probability_of_direction = {}
     images = {}
    
     @classmethod
@@ -95,9 +104,9 @@ class Ant():
             proba[item.value-1] = .1
             proba[item.value+1 if item.value<length-1 else 0] = .1
             proba[item.value-2] = .05
-            proba[item.value+2 if item.value<length-2 else length-item.value] = .05
-            cls.probability_of_direction[item.name] = proba
-        print(cls.probability_of_direction)
+            proba[item.value+2 if item.value<length-2 else (item.value+1)%7] = .05
+            cls.default_probability_of_direction[item.name] = proba
+        print(cls.default_probability_of_direction)
         
     @classmethod
     def add_ant(cls,ant):
@@ -130,45 +139,97 @@ class Ant():
             acc += ele
             if(acc>=rand):
                 return i
-            
-            
+                 
     def __init__(self,start_pos,direction):
         self.role = "seeker"
         self.action = "go"
         
-        self.position = start_pos
         self.direction = direction
-        self.image = self.images[direction]
-        self.rect = self.image.get_rect(topleft=start_pos)
-        self.step = 0
-        self.path = [""]*Ant.max_steps
-        self.current_proba_directions = Ant.probability_of_direction[direction]
+        self.position = start_pos
+        
+        self.path = [""]*(Ant.max_steps+1)
+        self.path[0] = (start_pos,direction)
+        self.current_proba_directions = Ant.default_probability_of_direction[direction]
+        
+    def has_reached_maximum_step(self):
+        return self.current_step == self.max_steps+1
+   
+    def has_arrived_at_nest(self):
+        return self.current_step == -1
+    
+    def has_arrived_at_food(self):
+        return self.current_step == self.destination_step
+    
+    @property
+    def action(self):
+        return self._action
+    
+    @action.setter
+    def action(self,value):
+        if(value == "go"):
+            self.current_step = 1
             
+        elif(value == "returner"):
+            self.current_step -= 1
+        
+        elif(value == "returner1"):
+            self.destination_step = self.current_step #food
+            self.current_step -= 1
+            
+        elif(value == "returner2"):
+            self.current_step = 1
+        else:
+            raise ValueError("action is wrong!")
+        
+        self._action = value
+      
+    
+    @property
+    def direction(self):
+        return self._direction
+    
+    @direction.setter
+    def direction(self,direction):
+        self._direction = direction
+        self.image = Ant.images[self.direction]
+    
+    @property
+    def position(self):
+        return self._position
+        
+    @position.setter
+    def position(self,position):
+        self._position = position
+        self.rect = self.image.get_rect(topleft=self._position)
+        
     @print_log()
     def random_move(self,peripheral_positions,peripheral_probability):
         
         #decide new direction
         for i in range(len(Direction)):
-            self.current_proba_directions[i] = Ant.probability_of_direction[self.direction][i]*peripheral_probability[i]
+            self.current_proba_directions[i] = Ant.default_probability_of_direction[self.direction][i]*peripheral_probability[i]
 
         index = Ant._choice(p=self.current_proba_directions)
+        
         self.direction = Direction(index).name
-        self.image = Ant.images[self.direction]
         self.position = peripheral_positions[index]
-        self.rect = self.image.get_rect(topleft=self.position)
-        self.path[self.step] = (self.position,self.direction)
-        self.step += 1
+       
+        self.path[self.current_step] = (self.position,self.direction)
+        self.current_step += 1
         
-    @print_log()  
     def reverse_move(self):
-        pos,direction = self.path[self.step]
-        
+        pos,direction = self.path[self.current_step]
+        #reversed direction 
         self.direction = Direction((Direction[direction].value+4)%len(Direction)).name
-        self.image = Ant.images[self.direction]
         self.position = pos
-        self.rect = self.image.get_rect(topleft=self.position)
-        self.step += 1
-           
+        self.current_step -= 1
+    
+    def move_to_food(self):
+        pos,direction = self.path[self.current_step]
+        self.direction = direction
+        self.position = pos
+        self.current_step += 1
+        
 class Map:
     screen = None
     right = 0
@@ -287,7 +348,8 @@ Nest.height = 50
 
 Ant.width  = 10
 Ant.height = 10
-Ant.count = 5
+Ant.count = 3
+Ant.max_steps = 50
 
 Map.width = 800
 Map.height = 600
@@ -423,30 +485,47 @@ def main():
                 if(ant.role == "seeker"):
                     if(ant.action == "go"):
                         Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
-                        Map.draw_rect(Color.TRACE_0,ant.rect)
+                        Map.draw_rect(Color.TRACE_1,ant.rect)
                         Map.calculate_peripheral_positions(ant.position)
                         Map.calculate_peripheral_probability()
                         ant.random_move(Map.peripheral_positions,Map.peripheral_probability)
                         Map.draw_image(ant.image,ant.rect)
                                     
-                        if(Food.collided_with_food(ant.position)):
+                        if(Food.collided_with_food(pos=ant.position,enlarged_scope=Ant.width)):
                             ant.role = "carrier"
                             ant.action = "returner1"
                             
-                        elif(ant.step == ant.max_steps):
-                            ant.step = (ant.step-1)*-1
+                        elif(ant.has_reached_maximum_step()):
                             ant.action = "returner"
+                            print(f"path:\n{ant.path}")
                             
                     elif(ant.action == "returner"):
+                        Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
+                        Map.draw_rect(Color.TRACE_1,ant.rect)
                         ant.reverse_move()
+                        Map.draw_image(ant.image,ant.rect)
                         
+                        if (ant.has_arrived_at_nest()):     
+                            ant.action = "go"
+                            
                 if(ant.role == "carrier"):
                     if(ant.action == "go"):
-                        pass
+                        Map.draw_rect(Color.TRACE_1,ant.rect)
+                        ant.move_to_food()
+                        Map.draw_image(ant.image,ant.rect)
+                        
+                        if(has_arrived_at_food):
+                            ant.action == "returner1"
                     
-                    elif(ant.action == "return1"):
-                        pass
-                    
+                    elif(ant.action == "returner1"):
+                        Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
+                        Map.draw_rect(Color.TRACE_2,ant.rect)
+                        ant.reverse_move()
+                        Map.draw_image(ant.image,ant.rect)
+                        
+                        if (ant.step == -1):     
+                            ant.action = "go"
+                            
                     elif(ant.action == "return2"):
                         pass
                

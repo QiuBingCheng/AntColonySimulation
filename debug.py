@@ -36,7 +36,7 @@ def print_log():
             dic.pop('cls', None)
             print(f"====={func.__name__} is called=====")
             print(dic)
-            print(f"return:{func(*args, **kwargs)}")
+            #print(f"return:{func(*args, **kwargs)}")
             return func(*args, **kwargs)
         return wrapper
     
