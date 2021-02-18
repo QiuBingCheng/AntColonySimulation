@@ -152,12 +152,16 @@ class Ant():
         self.path[0] = (start_pos,direction)
         self.current_proba_directions = Ant.default_probability_of_direction[direction]
         
+    @print_log()   
     def has_reached_maximum_step(self):
         return self.current_step == self.max_steps+1
-   
+    
+    @print_log()
     def has_arrived_at_nest(self):
+        print(self.current_step)
         return self.current_step == -1
     
+    @print_log()
     def has_arrived_at_food(self):
         return self.current_step == self.destination_step
     
@@ -167,23 +171,25 @@ class Ant():
     
     @action.setter
     def action(self,value):
+        print("===action===")
+        print(value)
         if(value == "go"):
             self.current_step = 1
             
-        elif(value == "returner"):
+        elif(value == "return"):
             self.current_step -= 1
         
-        elif(value == "returner1"):
+        elif(value == "return1"):
             self.destination_step = self.current_step #food
             self.current_step -= 1
             
-        elif(value == "returner2"):
+        elif(value == "return2"):
             self.current_step = 1
         else:
             raise ValueError("action is wrong!")
         
         self._action = value
-      
+        print(self._action)
     
     @property
     def direction(self):
@@ -217,14 +223,16 @@ class Ant():
        
         self.path[self.current_step] = (self.position,self.direction)
         self.current_step += 1
-        
+    
+    @print_log()    
     def reverse_move(self):
         pos,direction = self.path[self.current_step]
         #reversed direction 
         self.direction = Direction((Direction[direction].value+4)%len(Direction)).name
         self.position = pos
         self.current_step -= 1
-    
+        
+    @print_log()
     def move_to_food(self):
         #carrier move to find food along with same way
         pos,direction = self.path[self.current_step]
@@ -239,10 +247,21 @@ class Map:
     peripheral_probability = [0]*len(Direction)
     peripheral_positions = [0]*len(Direction)
     
+    
     @classmethod
     def set_screen(cls,screen):
         cls.screen = screen
         
+    @classmethod
+    def set_map(cls,size,color):
+        cls.size = size
+        cls.color = color
+        cls.rect = pygame.Rect(0, 0,size[0],size[1])
+    
+    @classmethod
+    def clear_map(cls):
+        pygame.draw.rect(cls.screen,cls.color,cls.rect)
+                           
     @classmethod    
     def draw_image(cls,image,rect):
         cls.screen.blit(image, rect)   
@@ -334,6 +353,11 @@ class Button():
         self.rect = self.image.get_rect(topleft=position)
         self.callback = callback
         
+    def change_image(self,image): 
+        self.image = image
+        self.image = pygame.transform.scale(image,self.size)
+        self.rect = self.image.get_rect(topleft=self.position)
+        
     def on_click(self, event):
         if event.button == 1:
             if self.rect.collidepoint(event.pos):
@@ -344,28 +368,33 @@ DEBUG = True
 #variable
 Food.width = 50
 Food.height = 50
+Food.count = 15
 
 Nest.width = 50
 Nest.height = 50
 
 Ant.width  = 10
 Ant.height = 10
-Ant.count = 3
+Ant.count = 1
 Ant.max_steps = 100
+
+#screen
+DEFAULT_BG_COLOR = Color.WHITE
 
 Map.width = 800
 Map.height = 600
-
+Map.set_map((800,600),DEFAULT_BG_COLOR)
 SCREEN_WIDTH = Map.width
 SCREEN_HEIGHT = Map.height+100
-
-IS_START = False
-current_time = 0
-DEFAULT_BG_COLOR = Color.WHITE
 screen = None
 Map.screen = screen
-maps = []
 
+#action
+start_btn = None
+IS_START = False
+current_time = 0
+
+maps = []
 for w in range(int(Map.width/Food.width)):
     for h in range(int(Map.height/Food.height)):
         maps.append((w*Food.width,h*Food.height))
@@ -373,6 +402,8 @@ for w in range(int(Map.width/Food.width)):
 #resources
 random_map_img = pygame.image.load('image/random_map.png')
 start_img = pygame.image.load("image/start.png")
+stop_img = pygame.image.load("image/stop.png")
+
 nest_img = pygame.image.load("image/nest.png")
 food_img = pygame.image.load("image/fruit.png")
 
@@ -385,9 +416,12 @@ Food.set_image(food_img,(Food.width,Food.height))
 #%%  
         
 def random_generate_map():
+    if (IS_START):
+        return
+    
     clear_map()
     
-    possible_positions = random.sample(maps,6)
+    possible_positions = random.sample(maps,Food.count)
     
     #nest
     Nest.set_position(possible_positions.pop())
@@ -425,27 +459,30 @@ def random_generate_map():
         Map.draw_image(ant.image,ant.rect)
         
 def clear_map():
-    #remove nest
-    if Nest.rect:
-        Map.draw_rect(DEFAULT_BG_COLOR,Nest.rect)
-        
-    #remove food
-    for food in Food.all_food:
-        Map.draw_rect(DEFAULT_BG_COLOR,food.rect)
+    Map.clear_map()
+    Ant.remove_all_ant()
     Food.remove_all_food()
-    
-    #remove ant
-    for ant in Ant.all_ant:
-        Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
     Ant.remove_all_ant()
     
 def start():
-    global IS_START,current_time
-    IS_START = True
-    current_time = time.time()
- 
+    global IS_START,current_time,start_btn
+    
+    #start->stop
+    if(IS_START):
+        IS_START = False
+        start_btn.change_image(start_img)
+        
+    else:
+        IS_START = True
+        current_time = time.time()
+        start_btn.change_image(stop_img)
+    
+    Map.draw_image(start_btn.image,start_btn.rect)    
+    
+    
+    
 def main():  
-    global SCREEN,IS_START,current_time 
+    global SCREEN,IS_START,current_time ,start_btn
     
     pygame.init()
     screen = pygame.display.set_mode((Map.width, Map.height+100))
@@ -484,6 +521,8 @@ def main():
        
         if (IS_START and (end-current_time>0.5)):
             for ant in Ant.all_ant:
+                print("===new iteration===")
+                print(ant.role,ant.action)
                 if(ant.role == "seeker"):
                     if(ant.action == "go"):
                         Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
@@ -496,14 +535,14 @@ def main():
                         food = Food.collided_with_food(pos=ant.position,enlarged_scope=2*Ant.width)
                         if(food):
                             ant.role = "carrier"
-                            ant.action = "returner1"
+                            ant.action = "return1"
                             ant.food  = food
                             
                         elif(ant.has_reached_maximum_step()):
-                            ant.action = "returner"
+                            ant.action = "return"
                             print(f"path:\n{ant.path}")
                             
-                    elif(ant.action == "returner"):
+                    elif(ant.action == "return"):
                         Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
                         Map.draw_rect(Color.TRACE_1,ant.rect)
                         ant.reverse_move()
@@ -518,20 +557,23 @@ def main():
                         ant.move_to_food()
                         Map.draw_image(ant.image,ant.rect)
                         
-                        if(ant.has_arrived_at_food):
+                        if(ant.has_arrived_at_food()):
+                            print("yes")
+                            print("**************")
                             if(ant.food.is_empty()):
-                                ant.action == "returner2"
+                                ant.action == "return2"
                             else:
                                 ant.food.size -= 1
-                                ant.action = "returner1"
+                                ant.action = "return1"
                     
-                    elif(ant.action == "returner1"):
+                    elif(ant.action == "return1"):
                         Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
                         Map.draw_rect(Color.TRACE_2,ant.rect)
                         ant.reverse_move()
                         Map.draw_image(ant.image,ant.rect)
                         
-                        if (ant.has_arrived_at_nest()):     
+                        if (ant.has_arrived_at_nest()):
+                            print("yes")
                             ant.action = "go"
                             
                     elif(ant.action == "return2"):
