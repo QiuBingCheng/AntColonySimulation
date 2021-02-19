@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-02-19T08:42:31.235Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="zcMIjlJQsuNvYS1fGS1U" version="14.4.2" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2021-02-19T08:53:15.281Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="K70qoHt2mxqzszbH6dby" version="14.4.2" type="github" pages="3">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -457,9 +457,6 @@
         <mxCell id="LKYx5Yq_qKN5qzXWiNuF-53" value="食物已空" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=35;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
           <mxGeometry x="925" y="571" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="LKYx5Yq_qKN5qzXWiNuF-56" value="&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;覓食者&lt;/li&gt;&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;前往覓食&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;空手返巢&lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;領導者&lt;/li&gt;&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;運食返巢&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;前往運食&lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;追隨者&lt;/li&gt;&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;前往運食&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;運食返巢&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=0;fontColor=#0F37FF;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
-          <mxGeometry x="10" y="50" width="170" height="100" as="geometry" />
-        </mxCell>
         <mxCell id="LKYx5Yq_qKN5qzXWiNuF-61" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;align=right;" edge="1" parent="e6-5AlToE3GWrAjFxom6-1" source="LKYx5Yq_qKN5qzXWiNuF-58" target="LKYx5Yq_qKN5qzXWiNuF-60">
           <mxGeometry x="0.6" y="35" relative="1" as="geometry">
             <mxPoint as="offset" />
@@ -537,11 +534,70 @@
         <mxCell id="LKYx5Yq_qKN5qzXWiNuF-88" value="追隨該領導者&lt;br&gt;並依循此路線覓食" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;direction=west;arcSize=28;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
           <mxGeometry x="1220" y="680" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="LKYx5Yq_qKN5qzXWiNuF-91" value="同個食物會有不同領導者&lt;br&gt;路線的長短會影響費洛蒙的累積&lt;br&gt;追隨者視費洛蒙決定要不要更換領導者" style="html=1;verticalLabelPosition=middle;align=left;labelBackgroundColor=#ffffff;verticalAlign=middle;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.message;fontSize=14;fontColor=#000000;flipH=1;labelPosition=center;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
-          <mxGeometry x="1340" y="510" width="250" height="86.63" as="geometry" />
+        <mxCell id="LKYx5Yq_qKN5qzXWiNuF-91" value="同個食物會有不同領導者&lt;br&gt;路線的長短會影響費洛蒙的累積&lt;br&gt;追隨者視費洛蒙深淺決定要不要更換領導者" style="html=1;verticalLabelPosition=middle;align=left;labelBackgroundColor=#ffffff;verticalAlign=middle;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.message;fontSize=14;fontColor=#000000;flipH=1;labelPosition=center;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
+          <mxGeometry x="1340" y="510" width="270" height="90" as="geometry" />
         </mxCell>
         <mxCell id="LKYx5Yq_qKN5qzXWiNuF-92" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
           <mxGeometry x="1300" y="651" width="40" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="veXmVFWgiMTowc5cXmQX" name="角色功能">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-0" />
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-1" parent="Ft1Zc83g8I4aKhNgwSPR-0" />
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-3" value="" style="shape=table;html=1;whiteSpace=wrap;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-1">
+          <mxGeometry x="120" y="110" width="590" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-4" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-3">
+          <mxGeometry width="590" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-5" value="角色" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;top=0;left=0;bottom=0;right=0;labelBackgroundColor=#0000FF;strokeColor=#001DBC;fontColor=#ffffff;fillColor=#0000FF;fontSize=14;fontStyle=1" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-4">
+          <mxGeometry width="198" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-6" value="簡介" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;top=0;left=0;bottom=0;right=0;labelBackgroundColor=#0000FF;strokeColor=#001DBC;fontColor=#ffffff;fillColor=#0000FF;fontSize=14;fontStyle=1" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-4">
+          <mxGeometry x="198" width="194" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-7" value="行為" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;top=0;left=0;bottom=0;right=0;labelBackgroundColor=#0000FF;strokeColor=#001DBC;fontColor=#ffffff;fillColor=#0000FF;fontSize=14;fontStyle=1" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-4">
+          <mxGeometry x="392" width="198" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-8" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-3">
+          <mxGeometry y="85" width="590" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-9" value="覓食者" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-8">
+          <mxGeometry width="198" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-10" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;漫無目的尋找食物，達到最大步數依循原路返巢。&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-8">
+          <mxGeometry x="198" width="194" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-11" value="&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;前往覓食&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;空手返巢&lt;/li&gt;&lt;/ul&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-8">
+          <mxGeometry x="392" width="198" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-12" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-3">
+          <mxGeometry y="165" width="590" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-13" value="領導者" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-12">
+          <mxGeometry width="198" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-14" value="當覓食者獨立發現食物時會成為領導者，並依循固定的行走路線搬運食物。" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-12">
+          <mxGeometry x="198" width="194" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-15" value="&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;運食返巢&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;前往運食&lt;/li&gt;&lt;/ul&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-12">
+          <mxGeometry x="392" width="198" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-16" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-3">
+          <mxGeometry y="250" width="590" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-17" value="追隨者" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-16">
+          <mxGeometry width="198" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-18" value="當覓食者路經領導者行走之路線，成為追隨者。在返巢時有機會更換搬運同個食物的領導者。" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;fontSize=14;align=left;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-16">
+          <mxGeometry x="198" width="194" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-19" value="&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;前往運食&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;運食返巢&lt;/li&gt;&lt;/ul&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-16">
+          <mxGeometry x="392" width="198" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
