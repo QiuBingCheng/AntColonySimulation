@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-02-19T09:37:26.928Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="Ut4VL7KDuABNnwZoBiRW" version="14.4.2" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2021-02-19T10:14:01.043Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="i9iXFu3hVJIYabDOoLBB" version="14.4.2" type="github" pages="3">
   <diagram id="veXmVFWgiMTowc5cXmQX" name="角色功能">
     <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -353,17 +353,40 @@
         <mxCell id="LKYx5Yq_qKN5qzXWiNuF-90" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#000000;align=right;" edge="1" parent="e6-5AlToE3GWrAjFxom6-1" source="LKYx5Yq_qKN5qzXWiNuF-86" target="LKYx5Yq_qKN5qzXWiNuF-88">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="IUnbb99ZSgv0tak18ghb-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.383;entryDx=0;entryDy=0;entryPerimeter=0;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#000000;align=right;" edge="1" parent="e6-5AlToE3GWrAjFxom6-1" source="LKYx5Yq_qKN5qzXWiNuF-86" target="IUnbb99ZSgv0tak18ghb-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1200" y="620" />
+              <mxPoint x="1200" y="827" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="LKYx5Yq_qKN5qzXWiNuF-86" value="是否有更合適的路徑" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=35;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
           <mxGeometry x="1240" y="580" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="IUnbb99ZSgv0tak18ghb-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#000000;align=right;" edge="1" parent="e6-5AlToE3GWrAjFxom6-1" source="LKYx5Yq_qKN5qzXWiNuF-88" target="IUnbb99ZSgv0tak18ghb-2">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="LKYx5Yq_qKN5qzXWiNuF-88" value="追隨該領導者&lt;br&gt;並依循此路線覓食" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;direction=west;arcSize=28;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
           <mxGeometry x="1220" y="680" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="LKYx5Yq_qKN5qzXWiNuF-91" value="同個食物會有不同領導者&lt;br&gt;路線的長短會影響費洛蒙的累積&lt;br&gt;追隨者視費洛蒙深淺決定要不要更換領導者" style="html=1;verticalLabelPosition=middle;align=left;labelBackgroundColor=#ffffff;verticalAlign=middle;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.message;fontSize=14;fontColor=#000000;flipH=1;labelPosition=center;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
-          <mxGeometry x="1340" y="510" width="270" height="90" as="geometry" />
+          <mxGeometry x="1340" y="540" width="270" height="90" as="geometry" />
         </mxCell>
         <mxCell id="LKYx5Yq_qKN5qzXWiNuF-92" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
           <mxGeometry x="1300" y="651" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="IUnbb99ZSgv0tak18ghb-0" value="運食返巢" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
+          <mxGeometry x="1290" y="325.5" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="IUnbb99ZSgv0tak18ghb-1" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
+          <mxGeometry x="1290" y="551" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="IUnbb99ZSgv0tak18ghb-2" value="行為 = 前往覓食" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;direction=west;arcSize=28;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
+          <mxGeometry x="1220" y="790" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IUnbb99ZSgv0tak18ghb-9" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
+          <mxGeometry x="1200" y="591" width="40" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
