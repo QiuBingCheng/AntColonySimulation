@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-02-19T08:35:50.767Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="es1DwgfLjbP4ko1ynF6t" version="14.4.2" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2021-02-19T08:42:31.235Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="zcMIjlJQsuNvYS1fGS1U" version="14.4.2" type="github" pages="2">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -531,14 +531,17 @@
         <mxCell id="LKYx5Yq_qKN5qzXWiNuF-90" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#000000;align=right;" edge="1" parent="e6-5AlToE3GWrAjFxom6-1" source="LKYx5Yq_qKN5qzXWiNuF-86" target="LKYx5Yq_qKN5qzXWiNuF-88">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="LKYx5Yq_qKN5qzXWiNuF-86" value="是否有較短路徑" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=35;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
+        <mxCell id="LKYx5Yq_qKN5qzXWiNuF-86" value="是否有更合適的路徑" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=35;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
           <mxGeometry x="1240" y="580" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="LKYx5Yq_qKN5qzXWiNuF-88" value="更換路線" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;direction=west;arcSize=28;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
+        <mxCell id="LKYx5Yq_qKN5qzXWiNuF-88" value="追隨該領導者&lt;br&gt;並依循此路線覓食" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;direction=west;arcSize=28;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
           <mxGeometry x="1220" y="680" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="LKYx5Yq_qKN5qzXWiNuF-91" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.message;fontSize=14;fontColor=#000000;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
-          <mxGeometry x="1380" y="640" width="60" height="40.5" as="geometry" />
+        <mxCell id="LKYx5Yq_qKN5qzXWiNuF-91" value="同個食物會有不同領導者&lt;br&gt;路線的長短會影響費洛蒙的累積&lt;br&gt;追隨者視費洛蒙決定要不要更換領導者" style="html=1;verticalLabelPosition=middle;align=left;labelBackgroundColor=#ffffff;verticalAlign=middle;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.message;fontSize=14;fontColor=#000000;flipH=1;labelPosition=center;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
+          <mxGeometry x="1340" y="510" width="250" height="86.63" as="geometry" />
+        </mxCell>
+        <mxCell id="LKYx5Yq_qKN5qzXWiNuF-92" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
+          <mxGeometry x="1300" y="651" width="40" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
