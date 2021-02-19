@@ -6,31 +6,12 @@ Created on Wed Feb  3 15:45:02 2021
 """
 import sys, os,pygame
 import random
+from util import Button,Direction,Color
 import time
-from enum import Enum
+
 from debug import print_log
 #%%
-class Direction(Enum):
-    EAST = 0
-    SOUTHEAST = 1
-    SOUTH = 2
-    SOUTHWEST = 3
-    WEST = 4
-    NORTHWEST = 5
-    NORTH = 6
-    NORTHEAST = 7
-     
-class Color:
-    BLUE = (0,0,255)
-    RED = (255,0,0) 
-    WHITE = (255,255,255)
-    BLACK = (0,0,0) 
-    YELLOW = (255,255,0) 
-    SLATE_GREY = (112,128,144)
-    TRANSPARENT = (0, 0, 0, 0)
-    TRACE_1 =  (204,255,255) #light blue
-    TRACE_2 = (255,99,71) #TOMATO
-    
+
 class Nest:
     rect = None
     
@@ -147,6 +128,7 @@ class Ant():
         
         self.direction = direction
         self.position = start_pos
+        self.peripheral_positions = [""]*len(Direction)
         
         self.path = [""]*(Ant.max_steps+1)
         self.path[0] = (start_pos,direction)
@@ -239,42 +221,54 @@ class Ant():
         self.direction = direction
         self.position = pos
         self.current_step += 1
+     
+    def perceive_peripheral_positions(self):
+        #east
+        left = self.position[0]+Ant.width
+        top = self.position[1]
+        self.peripheral_positions[Direction.EAST.value] = (left,top)
+      
+        #south east
+        left = self.position[0]+Ant.width
+        top = self.position[1]+Ant.height
+        self.peripheral_positions[Direction.SOUTHEAST.value] = (left,top)
         
+        #south
+        left = self.position[0]
+        top = self.position[1]+Ant.height
+        self.peripheral_positions[Direction.SOUTH.value] = (left,top)      
+        
+        #south west
+        left = self.position[0]-Ant.width
+        top = self.position[1]+Ant.height
+        self.peripheral_positions[Direction.SOUTHWEST.value] = (left,top)
+            
+        #west
+        left = self.position[0]-Ant.width
+        top = self.position[1]
+        self.peripheral_positions[Direction.WEST.value] = (left,top)     
+        
+        #north west
+        left = self.position[0]-Ant.width
+        top = self.position[1]-Ant.height
+        self.peripheral_positions[Direction.NORTHWEST.value] = (left,top)
+            
+        #NORTH
+        left = self.position[0]
+        top = self.position[1]-Ant.height
+        self.peripheral_positions[Direction.NORTH.value] = (left,top)
+        
+        #NORTH east
+        left = self.position[0]+Ant.width
+        top = self.position[1]-Ant.height
+        self.peripheral_positions[Direction.NORTHEAST.value] = (left,top)
+    
 class Map:
-    screen = None
-    right = 0
-    bottom = 0
-    peripheral_probability = [0]*len(Direction)
+    
+    prohibited_positions = [0]*len(Direction)
     peripheral_positions = [0]*len(Direction)
-    
-    
-    @classmethod
-    def set_screen(cls,screen):
-        cls.screen = screen
+    positions_of_pheromones = {}
         
-    @classmethod
-    def set_map(cls,size,color):
-        cls.size = size
-        cls.color = color
-        cls.rect = pygame.Rect(0, 0,size[0],size[1])
-    
-    @classmethod
-    def clear_map(cls):
-        pygame.draw.rect(cls.screen,cls.color,cls.rect)
-                           
-    @classmethod    
-    def draw_image(cls,image,rect):
-        cls.screen.blit(image, rect)   
-        
-    @staticmethod
-    def draw_line(color,size,pos):
-        pygame.draw.line(Map.screen,color,size,pos)
-        pygame.display.flip()
-        
-    @staticmethod
-    def draw_rect(color,rect):
-         pygame.draw.rect(Map.screen,color,rect)
-
     @staticmethod
     def is_outside_border(point):
         if(point[0]<=0 or point[0]+Ant.width>= Map.width or
@@ -282,60 +276,21 @@ class Map:
             return True
         else:
             return False
-    
-    @classmethod
-    @print_log()
-    def calculate_peripheral_positions(cls,pos):
-        #螞蟻朝外圍八格的行走機率
-        #若有障礙物則0
-        #east
-        left = pos[0]+Ant.width
-        top = pos[1]
-        cls.peripheral_positions[Direction.EAST.value] = (left,top)
-      
-        #south east
-        left = pos[0]+Ant.width
-        top = pos[1]+Ant.height
-        cls.peripheral_positions[Direction.SOUTHEAST.value] = (left,top)
-        
-        #south
-        left = pos[0]
-        top = pos[1]+Ant.height
-        cls.peripheral_positions[Direction.SOUTH.value] = (left,top)      
-        
-        #south west
-        left = pos[0]-Ant.width
-        top = pos[1]+Ant.height
-        cls.peripheral_positions[Direction.SOUTHWEST.value] = (left,top)
-            
-        #west
-        left = pos[0]-Ant.width
-        top = pos[1]
-        cls.peripheral_positions[Direction.WEST.value] = (left,top)     
-        
-        #north west
-        left = pos[0]-Ant.width
-        top = pos[1]-Ant.height
-        cls.peripheral_positions[Direction.NORTHWEST.value] = (left,top)
-            
-        #NORTH
-        left = pos[0]
-        top = pos[1]-Ant.height
-        cls.peripheral_positions[Direction.NORTH.value] = (left,top)
-        
-        #NORTH east
-        left = pos[0]+Ant.width
-        top = pos[1]-Ant.height
-        cls.peripheral_positions[Direction.NORTHEAST.value] = (left,top)
         
     @classmethod
     @print_log()    
-    def calculate_peripheral_probability(cls):
-        #螞蟻朝外圍八格的行走機率
-        #若有障礙物則0
+    def get_prohibited_positions(cls,positions):
+        #決定螞蟻外圍路徑是否可以通行(有無障礙物)
+        for d,pos in enumerate(positions):
+            cls.prohibited_positions[d] = 1 if(Map._is_allowed_to_pass(pos)) else 0
+    
+    @classmethod
+    @print_log()    
+    def get_pheromones_of_positions(cls,positions):
+        #決定螞蟻外圍路徑的費洛蒙
         for d,pos in enumerate(cls.peripheral_positions):
             cls.peripheral_probability[d] = 1 if(Map._is_allowed_to_pass(pos)) else 0
-        
+            
     @staticmethod           
     def  _is_allowed_to_pass(pos):
          if(Food.collided_with_empty_food(pos) or 
@@ -344,24 +299,7 @@ class Map:
              return False
          return True
         
-class Button():
-    def __init__(self,position,size,image,callback):
-        self.position = position
-        self.size = size
-        self.image = image
-        self.image = pygame.transform.scale(image,size)
-        self.rect = self.image.get_rect(topleft=position)
-        self.callback = callback
-        
-    def change_image(self,image): 
-        self.image = image
-        self.image = pygame.transform.scale(image,self.size)
-        self.rect = self.image.get_rect(topleft=self.position)
-        
-    def on_click(self, event):
-        if event.button == 1:
-            if self.rect.collidepoint(event.pos):
-                self.callback()
+
 #%%
 DEBUG = True
 
@@ -383,11 +321,9 @@ DEFAULT_BG_COLOR = Color.WHITE
 
 Map.width = 800
 Map.height = 600
-Map.set_map((800,600),DEFAULT_BG_COLOR)
+SCREEN = None
 SCREEN_WIDTH = Map.width
 SCREEN_HEIGHT = Map.height+100
-screen = None
-Map.screen = screen
 
 #action
 start_btn = None
@@ -425,13 +361,13 @@ def random_generate_map():
     
     #nest
     Nest.set_position(possible_positions.pop())
-    Map.draw_image(Nest.image,Nest.rect)
+    SCREEN.blit(Nest.image,Nest.rect) 
     
      #food
     for pos in possible_positions:
         food = Food(pos)
         Food.add_food(food)
-        Map.draw_image(Food.image,food.rect)
+        SCREEN.blit(Food.image,food.rect) 
     
     #ant
     left = Nest.position[0]-Ant.height
@@ -456,10 +392,12 @@ def random_generate_map():
     for pos in ants_positions:  
         ant = Ant(pos,Direction.NORTH.name)
         Ant.add_ant(ant)
-        Map.draw_image(ant.image,ant.rect)
+        SCREEN.blit(ant.image,ant.rect) 
         
 def clear_map():
-    Map.clear_map()
+    map_rect = pygame.Rect(0, 0,Map.width,Map.height)
+    pygame.draw.rect(SCREEN,DEFAULT_BG_COLOR,map_rect)
+    
     Ant.remove_all_ant()
     Food.remove_all_food()
     Ant.remove_all_ant()
@@ -476,33 +414,31 @@ def start():
         IS_START = True
         current_time = time.time()
         start_btn.change_image(stop_img)
-    
-    Map.draw_image(start_btn.image,start_btn.rect)    
-    
+     
+    SCREEN.blit(start_btn.image,start_btn.rect) 
     
     
 def main():  
     global SCREEN,IS_START,current_time ,start_btn
     
     pygame.init()
-    screen = pygame.display.set_mode((Map.width, Map.height+100))
-    screen.fill(DEFAULT_BG_COLOR)
-    Map.set_screen(screen)
+    SCREEN = pygame.display.set_mode((Map.width, Map.height+100))
+    SCREEN.fill(DEFAULT_BG_COLOR)
     
     random_generate_map()
     
     #draw line
-    Map.draw_line(Color.SLATE_GREY, (0,Map.height), (SCREEN_WIDTH, Map.height))
+    pygame.draw.line(SCREEN,Color.SLATE_GREY, (0,Map.height), (SCREEN_WIDTH, Map.height))
     
     #button
     ##ramdom map
     random_map = Button((0,Map.height),(80,50),random_map_img,random_generate_map)
-    Map.draw_image(random_map.image,random_map.rect)
+    SCREEN.blit(random_map.image,random_map.rect)   
     
     ## start
     start_btn = Button((random_map.position[0]+random_map.size[0],Map.height),
                               (80,50),start_img,start)
-    Map.draw_image(start_btn.image,start_btn.rect)
+    SCREEN.blit(start_btn.image,start_btn.rect) 
     
     # Run until the user asks to quit
     running = True
@@ -525,12 +461,19 @@ def main():
                 print(ant.role,ant.action)
                 if(ant.role == "seeker"):
                     if(ant.action == "go"):
-                        Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
-                        Map.draw_rect(Color.TRACE_1,ant.rect)
-                        Map.calculate_peripheral_positions(ant.position)
-                        Map.calculate_peripheral_probability()
-                        ant.random_move(Map.peripheral_positions,Map.peripheral_probability)
-                        Map.draw_image(ant.image,ant.rect)
+                        
+                        pygame.draw.rect(SCREEN,DEFAULT_BG_COLOR,ant.rect)
+                        pygame.draw.rect(SCREEN,Color.TRACE_1,ant.rect)
+                        #decide 
+                        peripheral_positions = ant.get_peripheral_positions()
+                        
+                        prohibited_pos = Map.get_prohibited_positions(peripheral_positions)
+                        pheromones = Map.get_pheromones_of_positions(peripheral_positions)
+                        ant.random_move(prohibited_pos,pheromones)
+                        
+                        #draw image
+                        SCREEN.blit(ant.image,ant.rect)
+
                         
                         food = Food.collided_with_food(pos=ant.position,enlarged_scope=2*Ant.width)
                         if(food):
@@ -543,19 +486,19 @@ def main():
                             print(f"path:\n{ant.path}")
                             
                     elif(ant.action == "return"):
-                        Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
-                        Map.draw_rect(Color.TRACE_1,ant.rect)
+                        pygame.draw.rect(SCREEN,DEFAULT_BG_COLOR,ant.rect)
+                        pygame.draw.rect(SCREEN,Color.TRACE_1,ant.rect)
                         ant.reverse_move()
-                        Map.draw_image(ant.image,ant.rect)
+                        SCREEN.blit(ant.image,ant.rect)
                         
                         if (ant.has_arrived_at_nest()):     
                             ant.action = "go"
                             
                 elif(ant.role == "carrier"):
                     if(ant.action == "go"):
-                        Map.draw_rect(Color.TRACE_2,ant.rect)
+                        pygame.draw.rect(SCREEN,Color.TRACE_2,ant.rect)
                         ant.move_to_food()
-                        Map.draw_image(ant.image,ant.rect)
+                        SCREEN.blit(ant.image,ant.rect)
                         
                         if(ant.has_arrived_at_food()):
                             print("yes")
@@ -567,10 +510,10 @@ def main():
                                 ant.action = "return1"
                     
                     elif(ant.action == "return1"):
-                        Map.draw_rect(DEFAULT_BG_COLOR,ant.rect)
-                        Map.draw_rect(Color.TRACE_2,ant.rect)
+                        pygame.draw.rect(SCREEN,DEFAULT_BG_COLOR,ant.rect)
+                        pygame.draw.rect(SCREEN,Color.TRACE_2,ant.rect)
                         ant.reverse_move()
-                        Map.draw_image(ant.image,ant.rect)
+                        SCREEN.blit(ant.image,ant.rect)
                         
                         if (ant.has_arrived_at_nest()):
                             print("yes")
