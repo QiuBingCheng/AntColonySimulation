@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-02-19T08:07:31.389Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="Asg73k9vtM8_3z_MoKGD" version="14.4.2" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2021-02-19T08:09:00.311Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="UY78loFvKpP7LfA-PQNF" version="14.4.2" type="github" pages="2">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -316,7 +316,7 @@
             <mxPoint x="310" y="511" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="8Gio5fNEHYBw2QR1s_1J-13" value="role = follower&lt;br style=&quot;font-size: 13px&quot;&gt;action = return1" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
+        <mxCell id="8Gio5fNEHYBw2QR1s_1J-13" value="角色 = 追隨者&lt;br&gt;行為 = 前往運食" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
           <mxGeometry x="210" y="591" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="8Gio5fNEHYBw2QR1s_1J-16" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
@@ -439,7 +439,7 @@
         <mxCell id="LKYx5Yq_qKN5qzXWiNuF-50" value="抵達食物" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=35;fontSize=13;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
           <mxGeometry x="990" y="466.5" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="LKYx5Yq_qKN5qzXWiNuF-52" value="action = go" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;direction=west;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
+        <mxCell id="LKYx5Yq_qKN5qzXWiNuF-52" value="角色 = 覓食者&lt;br&gt;行為 = 前往覓食" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;direction=west;" vertex="1" parent="e6-5AlToE3GWrAjFxom6-1">
           <mxGeometry x="970" y="680" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="LKYx5Yq_qKN5qzXWiNuF-55" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="e6-5AlToE3GWrAjFxom6-1" source="LKYx5Yq_qKN5qzXWiNuF-53" target="LKYx5Yq_qKN5qzXWiNuF-52">
