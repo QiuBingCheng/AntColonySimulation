@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2021-02-19T10:14:01.043Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="i9iXFu3hVJIYabDOoLBB" version="14.4.2" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2021-02-19T10:20:44.758Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="aBeVZ6QQgfVV8OaEptdu" version="14.4.2" type="github" pages="3">
   <diagram id="veXmVFWgiMTowc5cXmQX" name="角色功能">
     <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="Ft1Zc83g8I4aKhNgwSPR-0" />
         <mxCell id="Ft1Zc83g8I4aKhNgwSPR-1" parent="Ft1Zc83g8I4aKhNgwSPR-0" />
         <mxCell id="Ft1Zc83g8I4aKhNgwSPR-3" value="" style="shape=table;html=1;whiteSpace=wrap;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-1">
-          <mxGeometry x="120" y="110" width="590" height="330" as="geometry" />
+          <mxGeometry x="110" y="110" width="590" height="370" as="geometry" />
         </mxCell>
         <mxCell id="Ft1Zc83g8I4aKhNgwSPR-4" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-3">
           <mxGeometry width="590" height="85" as="geometry" />
@@ -25,7 +25,7 @@
         <mxCell id="Ft1Zc83g8I4aKhNgwSPR-9" value="覓食者" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-8">
           <mxGeometry width="198" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-10" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;漫無目的尋找食物，達到最大步數依循原路返巢。&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-8">
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-10" value="&lt;span style=&quot;font-size: 14px&quot;&gt;隨機往正前方、右前方、左前方移動，達到最大步數依循原路返巢。&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-8">
           <mxGeometry x="198" width="194" height="80" as="geometry" />
         </mxCell>
         <mxCell id="Ft1Zc83g8I4aKhNgwSPR-11" value="&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;前往覓食&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;空手返巢&lt;/li&gt;&lt;/ul&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-8">
@@ -44,16 +44,16 @@
           <mxGeometry x="392" width="198" height="85" as="geometry" />
         </mxCell>
         <mxCell id="Ft1Zc83g8I4aKhNgwSPR-16" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-3">
-          <mxGeometry y="250" width="590" height="80" as="geometry" />
+          <mxGeometry y="250" width="590" height="120" as="geometry" />
         </mxCell>
         <mxCell id="Ft1Zc83g8I4aKhNgwSPR-17" value="追隨者" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-16">
-          <mxGeometry width="198" height="80" as="geometry" />
+          <mxGeometry width="198" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-18" value="當覓食者路經領導者行走之路線，成為追隨者。在返巢時有機會更換搬運同個食物的領導者。" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;fontSize=14;align=left;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-16">
-          <mxGeometry x="198" width="194" height="80" as="geometry" />
+        <mxCell id="Ft1Zc83g8I4aKhNgwSPR-18" value="當覓食者路經領導者行走之路線，成為追隨者。在運食返巢時視費洛蒙多寡，決定是否更換搬運同個食物、行走不同路線的領導者，並以該路線作為行走依據。" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;fontSize=14;align=left;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-16">
+          <mxGeometry x="198" width="194" height="120" as="geometry" />
         </mxCell>
         <mxCell id="Ft1Zc83g8I4aKhNgwSPR-19" value="&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;前往運食&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;運食返巢&lt;/li&gt;&lt;/ul&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;fontSize=14;" vertex="1" parent="Ft1Zc83g8I4aKhNgwSPR-16">
-          <mxGeometry x="392" width="198" height="80" as="geometry" />
+          <mxGeometry x="392" width="198" height="120" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
