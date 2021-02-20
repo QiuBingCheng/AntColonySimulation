@@ -8,7 +8,7 @@ import sys, os,pygame
 import random
 from util import Button,Direction,Color
 import time
-
+from collections import defaultdict
 from debug import print_log
 #%%
 
@@ -125,7 +125,7 @@ class Ant():
     def __init__(self,start_pos,direction):
         self.role = "seeker"
         self.action = "go"
-        
+        self.drop_amount = 5
         self.direction = direction
         self.position = start_pos
         self.peripheral_positions = [""]*len(Direction)
@@ -192,16 +192,18 @@ class Ant():
         self.rect = self.image.get_rect(topleft=self._position)
         
     @print_log()
-    def random_move(self,peripheral_positions,peripheral_probability):
+    def random_move(self,prohibited_positions,positions_of_pheromones):
         
         #decide new direction
+        # if position is prohibited , probability is 0
         for i in range(len(Direction)):
-            self.current_proba_directions[i] = Ant.default_probability_of_direction[self.direction][i]*peripheral_probability[i]
-
+            self.current_proba_directions[i] = Ant.default_probability_of_direction[self.direction][i]*prohibited_positions[i]
+            self.current_proba_directions[i] += positions_of_pheromones[i]/100
+            
         index = Ant._choice(p=self.current_proba_directions)
         
         self.direction = Direction(index).name
-        self.position = peripheral_positions[index]
+        self.position = self.peripheral_positions[index]
        
         self.path[self.current_step] = (self.position,self.direction)
         self.current_step += 1
@@ -264,10 +266,12 @@ class Ant():
         self.peripheral_positions[Direction.NORTHEAST.value] = (left,top)
     
 class Map:
-    
+    #[1,0,1,..] 1表示可以通行
     prohibited_positions = [0]*len(Direction)
-    peripheral_positions = [0]*len(Direction)
-    positions_of_pheromones = {}
+    #費洛蒙
+    positions_of_pheromones = [0]*len(Direction)
+   
+    pheromones = defaultdict(int)
         
     @staticmethod
     def is_outside_border(point):
@@ -279,18 +283,36 @@ class Map:
         
     @classmethod
     @print_log()    
-    def get_prohibited_positions(cls,positions):
+    def decide_prohibited_positions(cls,positions):
         #決定螞蟻外圍路徑是否可以通行(有無障礙物)
         for d,pos in enumerate(positions):
             cls.prohibited_positions[d] = 1 if(Map._is_allowed_to_pass(pos)) else 0
     
     @classmethod
     @print_log()    
-    def get_pheromones_of_positions(cls,positions):
+    def decide_pheromones_of_positions(cls,positions):
         #決定螞蟻外圍路徑的費洛蒙
-        for d,pos in enumerate(cls.peripheral_positions):
-            cls.peripheral_probability[d] = 1 if(Map._is_allowed_to_pass(pos)) else 0
-            
+        for d,pos in enumerate(positions):
+            cls.positions_of_pheromones[d] = cls.pheromones[pos] if pos in cls.pheromones else 0
+
+    @classmethod
+    def add_pheromones(cls,position,amount):
+        cls.pheromones[position] +=  amount
+    
+    @classmethod
+    def evaporate_pheromones(cls,amount,positions=None):
+        #positions is collections
+        
+        if positions:
+            for pos in positions:
+                cls.pheromones[pos] -=  amount
+                cls.pheromones[pos] = max(0,cls.pheromones[pos])
+        else:
+            for pos in cls.pheromones:
+                cls.pheromones[pos] -= amount
+                cls.pheromones[pos] = max(0,cls.pheromones[pos])
+               
+    
     @staticmethod           
     def  _is_allowed_to_pass(pos):
          if(Food.collided_with_empty_food(pos) or 
@@ -313,7 +335,7 @@ Nest.height = 50
 
 Ant.width  = 10
 Ant.height = 10
-Ant.count = 1
+Ant.count = 20
 Ant.max_steps = 100
 
 #screen
@@ -464,12 +486,12 @@ def main():
                         
                         pygame.draw.rect(SCREEN,DEFAULT_BG_COLOR,ant.rect)
                         pygame.draw.rect(SCREEN,Color.TRACE_1,ant.rect)
-                        #decide 
-                        peripheral_positions = ant.get_peripheral_positions()
                         
-                        prohibited_pos = Map.get_prohibited_positions(peripheral_positions)
-                        pheromones = Map.get_pheromones_of_positions(peripheral_positions)
-                        ant.random_move(prohibited_pos,pheromones)
+                        #decide 
+                        ant.perceive_peripheral_positions()
+                        Map.decide_prohibited_positions(ant.peripheral_positions)
+                        Map.decide_pheromones_of_positions(ant.peripheral_positions)
+                        ant.random_move(Map.prohibited_positions,Map.positions_of_pheromones)
                         
                         #draw image
                         SCREEN.blit(ant.image,ant.rect)
@@ -496,6 +518,7 @@ def main():
                             
                 elif(ant.role == "carrier"):
                     if(ant.action == "go"):
+                        Map.add_pheromones(ant.position,ant.drop_amount)
                         pygame.draw.rect(SCREEN,Color.TRACE_2,ant.rect)
                         ant.move_to_food()
                         SCREEN.blit(ant.image,ant.rect)
@@ -510,7 +533,8 @@ def main():
                                 ant.action = "return1"
                     
                     elif(ant.action == "return1"):
-                        pygame.draw.rect(SCREEN,DEFAULT_BG_COLOR,ant.rect)
+                        #pygame.draw.rect(SCREEN,DEFAULT_BG_COLOR,ant.rect)
+                        Map.add_pheromones(ant.position,ant.drop_amount)
                         pygame.draw.rect(SCREEN,Color.TRACE_2,ant.rect)
                         ant.reverse_move()
                         SCREEN.blit(ant.image,ant.rect)
