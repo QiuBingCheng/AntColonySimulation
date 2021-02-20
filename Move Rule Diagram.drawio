@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-02-20T07:31:22.537Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="F4g9VHattTg9mYOg2LPR" version="14.4.2" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2021-02-20T09:18:54.188Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="TxmVL-KQyKi1caG6Syf3" version="14.4.2" type="github" pages="5">
   <diagram id="veXmVFWgiMTowc5cXmQX" name="角色功能">
     <mxGraphModel dx="1092" dy="548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -928,8 +928,11 @@
         <mxCell id="J0djFIw-iUX-w-i-Za1r-0" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
           <mxGeometry x="430" y="260" width="40" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="J0djFIw-iUX-w-i-Za1r-1" value="隨機往前移動一步" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
+        <mxCell id="J0djFIw-iUX-w-i-Za1r-1" value="往費洛蒙濃度最高的位置移動" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
           <mxGeometry x="210" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="J0djFIw-iUX-w-i-Za1r-3" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
+          <mxGeometry x="340" y="190" width="40" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
