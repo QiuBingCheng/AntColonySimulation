@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-02-20T04:45:14.923Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="wkGEuB2HNo8dOyLVfO9K" version="14.4.2" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2021-02-20T05:04:33.079Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="bBYn6I7U46e9Liy19GK7" version="14.4.2" type="github" pages="5">
   <diagram id="veXmVFWgiMTowc5cXmQX" name="角色功能">
-    <mxGraphModel dx="1038" dy="548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1092" dy="548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="Ft1Zc83g8I4aKhNgwSPR-0" />
         <mxCell id="Ft1Zc83g8I4aKhNgwSPR-1" parent="Ft1Zc83g8I4aKhNgwSPR-0" />
@@ -79,7 +79,7 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="YyHrE5DsL-xGlaKrcODO" name="移動規則">
+  <diagram id="YyHrE5DsL-xGlaKrcODO" name="移動規則 Ver.1">
     <mxGraphModel dx="1285" dy="645" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="e6-5AlToE3GWrAjFxom6-0" />
@@ -412,20 +412,16 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram name="Copy of 移動規則" id="xvaD_KoKjwiFLmVuS_Fo">
+  <diagram name="移動規則 Ver.2" id="xvaD_KoKjwiFLmVuS_Fo">
     <mxGraphModel dx="1092" dy="548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-0" />
         <mxCell id="ifqsz0iexj4ESSG9_zG0-1" parent="ifqsz0iexj4ESSG9_zG0-0" />
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=left;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-4" target="ifqsz0iexj4ESSG9_zG0-31">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#0F37FF;align=right;exitX=0.442;exitY=0.983;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-4" target="ifqsz0iexj4ESSG9_zG0-66">
+        <mxCell id="nQRd0aMm3oo7OlAblVIA-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-4" target="ifqsz0iexj4ESSG9_zG0-66">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="640" y="69" />
               <mxPoint x="640" y="100" />
-              <mxPoint x="1120" y="100" />
+              <mxPoint x="945" y="100" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -525,34 +521,6 @@
         <mxCell id="ifqsz0iexj4ESSG9_zG0-29" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
           <mxGeometry x="130" y="551" width="40" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-30" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;spacingLeft=0;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="0.4" y="35" relative="1" as="geometry">
-            <mxPoint x="820" y="204.5" as="sourcePoint" />
-            <mxPoint x="820" y="234.5" as="targetPoint" />
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-31" value="領導者" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="780" y="129" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-34" target="ifqsz0iexj4ESSG9_zG0-36">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-34" target="ifqsz0iexj4ESSG9_zG0-58">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-34" value="行為" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="780" y="234.5" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-36" target="ifqsz0iexj4ESSG9_zG0-54">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-36" value="往巢穴移動一步&lt;br style=&quot;font-size: 13px;&quot;&gt;並&lt;font color=&quot;#ff0000&quot; style=&quot;font-size: 13px;&quot;&gt;增添&lt;/font&gt;費洛蒙" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="760" y="355.5" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-37" value="運食返巢" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="835" y="325.5" width="60" height="20" as="geometry" />
-        </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-38" value="視空食為障礙物" style="html=1;verticalLabelPosition=middle;align=center;labelBackgroundColor=#ffffff;verticalAlign=middle;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.message;fontSize=13;labelPosition=center;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
           <mxGeometry x="237.5" y="310.5" width="125" height="50" as="geometry" />
         </mxCell>
@@ -600,109 +568,61 @@
         <mxCell id="ifqsz0iexj4ESSG9_zG0-52" value="領導者或跟隨者的費洛蒙" style="html=1;verticalLabelPosition=middle;align=center;labelBackgroundColor=#ffffff;verticalAlign=middle;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.message;fontSize=13;labelPosition=center;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
           <mxGeometry x="120" y="420" width="160" height="46.5" as="geometry" />
         </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-53" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-54" target="ifqsz0iexj4ESSG9_zG0-55">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-54" value="抵達巢穴" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=35;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="780" y="466.5" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-55" value="行為 = 前往運食" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;direction=west;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="760" y="590" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-56" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="835" y="560" width="40" height="20" as="geometry" />
-        </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-57" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-58" target="ifqsz0iexj4ESSG9_zG0-61">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-58" value="往食物移動一步&lt;br&gt;並&lt;font color=&quot;#ff0000&quot;&gt;增添&lt;/font&gt;費洛蒙" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="905" y="355.5" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-59" value="前往運食" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="975" y="330" width="80" height="20" as="geometry" />
+          <mxGeometry x="730" y="356.75" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-60" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-61" target="ifqsz0iexj4ESSG9_zG0-64">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-61" value="抵達食物" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=35;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="925" y="466.5" width="80" height="80" as="geometry" />
+          <mxGeometry x="750" y="467.75" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-62" value="角色 = 覓食者&lt;br&gt;行為 = 前往覓食" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;direction=west;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="905" y="680" width="120" height="60" as="geometry" />
+          <mxGeometry x="730" y="681.25" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-63" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-64" target="ifqsz0iexj4ESSG9_zG0-62">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-64" value="食物已空" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=35;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="925" y="571" width="80" height="80" as="geometry" />
+          <mxGeometry x="750" y="572.25" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-65" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-66" target="ifqsz0iexj4ESSG9_zG0-69">
           <mxGeometry x="0.6" y="35" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-66" value="追隨者" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1080" y="120" width="80" height="80" as="geometry" />
+        <mxCell id="ifqsz0iexj4ESSG9_zG0-66" value="搬運工" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
+          <mxGeometry x="905" y="121.25" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-67" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#000000;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-69" target="ifqsz0iexj4ESSG9_zG0-72">
+        <mxCell id="ifqsz0iexj4ESSG9_zG0-98" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-69" target="ifqsz0iexj4ESSG9_zG0-58">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#000000;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-69" target="ifqsz0iexj4ESSG9_zG0-83">
+        <mxCell id="ifqsz0iexj4ESSG9_zG0-100" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-69" target="ifqsz0iexj4ESSG9_zG0-83">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-69" value="行為" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1080" y="234.5" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-70" value="前往運食" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1120" y="325.5" width="80" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-71" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#000000;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-72" target="ifqsz0iexj4ESSG9_zG0-76">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-72" value="沿著領導者路線&lt;br&gt;往食物移動一步&lt;br&gt;並&lt;font color=&quot;#ff0000&quot;&gt;增添&lt;/font&gt;費洛蒙" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1060" y="360.5" width="120" height="60" as="geometry" />
+          <mxGeometry x="905" y="235.75" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-73" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="975" y="555.5" width="40" height="20" as="geometry" />
+          <mxGeometry x="800" y="556.75" width="40" height="20" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-74" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="985" y="650" width="40" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-75" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-76" target="ifqsz0iexj4ESSG9_zG0-77">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-76" value="抵達食物" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=35;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1080" y="471" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-77" value="食物已空" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=50;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1080" y="581" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-78" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1130" y="551" width="40" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-79" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1140" y="651" width="40" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-80" value="角色 = 覓食者&lt;br&gt;行為 = 前往覓食" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;direction=west;arcSize=28;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1060" y="680" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="ifqsz0iexj4ESSG9_zG0-81" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" target="ifqsz0iexj4ESSG9_zG0-80">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1120" y="655" as="sourcePoint" />
-            <mxPoint x="1120" y="684" as="targetPoint" />
-          </mxGeometry>
+          <mxGeometry x="810" y="651.25" width="40" height="20" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-82" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#000000;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-83" target="ifqsz0iexj4ESSG9_zG0-85">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-83" value="沿著領導者路線&lt;br&gt;往巢穴移動一步&lt;br style=&quot;font-size: 13px&quot;&gt;並&lt;font color=&quot;#ff0000&quot; style=&quot;font-size: 13px&quot;&gt;增添&lt;/font&gt;費洛蒙" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1220" y="360.5" width="120" height="60" as="geometry" />
+          <mxGeometry x="885" y="351.25" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-84" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#000000;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-85" target="ifqsz0iexj4ESSG9_zG0-88">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-85" value="抵達巢穴" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=35;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1240" y="475.5" width="80" height="80" as="geometry" />
+          <mxGeometry x="905" y="466.25" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-86" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#000000;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-88" target="ifqsz0iexj4ESSG9_zG0-90">
           <mxGeometry relative="1" as="geometry" />
@@ -710,37 +630,37 @@
         <mxCell id="ifqsz0iexj4ESSG9_zG0-87" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.383;entryDx=0;entryDy=0;entryPerimeter=0;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#000000;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-88" target="ifqsz0iexj4ESSG9_zG0-95">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1200" y="620" />
-              <mxPoint x="1200" y="827" />
+              <mxPoint x="865" y="620.75" />
+              <mxPoint x="865" y="827.75" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-88" value="是否有更合適的路徑" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=35;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1240" y="580" width="80" height="80" as="geometry" />
+          <mxGeometry x="905" y="570.75" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-89" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=14;fontColor=#000000;align=right;" edge="1" parent="ifqsz0iexj4ESSG9_zG0-1" source="ifqsz0iexj4ESSG9_zG0-90" target="ifqsz0iexj4ESSG9_zG0-95">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-90" value="追隨該領導者&lt;br&gt;並依循此路線覓食" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;direction=west;arcSize=28;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1220" y="680" width="120" height="60" as="geometry" />
+          <mxGeometry x="885" y="670.75" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-91" value="同個食物會有不同領導者&lt;br&gt;路線的長短會影響費洛蒙的累積&lt;br&gt;追隨者視費洛蒙深淺決定要不要更換領導者" style="html=1;verticalLabelPosition=middle;align=left;labelBackgroundColor=#ffffff;verticalAlign=middle;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.message;fontSize=14;fontColor=#000000;flipH=1;labelPosition=center;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1340" y="540" width="270" height="90" as="geometry" />
+          <mxGeometry x="1005" y="517.25" width="270" height="90" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-92" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1300" y="651" width="40" height="20" as="geometry" />
+          <mxGeometry x="965" y="641.75" width="40" height="20" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-93" value="運食返巢" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1290" y="325.5" width="60" height="20" as="geometry" />
+          <mxGeometry x="955" y="326.75" width="60" height="20" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-94" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1290" y="551" width="40" height="20" as="geometry" />
+          <mxGeometry x="955" y="541.75" width="40" height="20" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-95" value="行為 = 前往覓食" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;direction=west;arcSize=28;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1220" y="790" width="120" height="60" as="geometry" />
+          <mxGeometry x="885" y="780.75" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ifqsz0iexj4ESSG9_zG0-96" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="ifqsz0iexj4ESSG9_zG0-1">
-          <mxGeometry x="1200" y="591" width="40" height="20" as="geometry" />
+          <mxGeometry x="865" y="591.75" width="40" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
@@ -975,6 +895,20 @@
         </mxCell>
         <mxCell id="xFRTWmS1-elq7vr72Fm1-37" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="290" y="660" width="40" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="I81wSbUiaTvhzQUxiUvv" name="費洛蒙">
+    <mxGraphModel dx="1092" dy="548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="IsErr10G7rcVayq6A78a-0" />
+        <mxCell id="IsErr10G7rcVayq6A78a-1" parent="IsErr10G7rcVayq6A78a-0" />
+        <mxCell id="IsErr10G7rcVayq6A78a-2" value="{position:Ant ID}" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
+          <mxGeometry x="160" y="130" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="IsErr10G7rcVayq6A78a-3" value="跟隨者的費洛蒙會增添在領導者的蹤跡上" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
+          <mxGeometry x="140" y="240" width="280" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
