@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-02-20T05:04:33.079Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="bBYn6I7U46e9Liy19GK7" version="14.4.2" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2021-02-20T07:31:22.537Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="F4g9VHattTg9mYOg2LPR" version="14.4.2" type="github" pages="5">
   <diagram id="veXmVFWgiMTowc5cXmQX" name="角色功能">
     <mxGraphModel dx="1092" dy="548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -899,16 +899,37 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="I81wSbUiaTvhzQUxiUvv" name="費洛蒙">
+  <diagram id="I81wSbUiaTvhzQUxiUvv" name="覓食者的移動">
     <mxGraphModel dx="1092" dy="548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="IsErr10G7rcVayq6A78a-0" />
         <mxCell id="IsErr10G7rcVayq6A78a-1" parent="IsErr10G7rcVayq6A78a-0" />
-        <mxCell id="IsErr10G7rcVayq6A78a-2" value="{position:Ant ID}" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
-          <mxGeometry x="160" y="130" width="280" height="50" as="geometry" />
+        <mxCell id="y31tEONFL_qTeVTilAf7-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="IsErr10G7rcVayq6A78a-1" source="FY1Nm-ManXHKzDCKJu_T-0" target="y31tEONFL_qTeVTilAf7-0">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="IsErr10G7rcVayq6A78a-3" value="跟隨者的費洛蒙會增添在領導者的蹤跡上" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
-          <mxGeometry x="140" y="240" width="280" height="50" as="geometry" />
+        <mxCell id="FY1Nm-ManXHKzDCKJu_T-0" value="覓食者" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
+          <mxGeometry x="360" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cYXsOa2uhSyHparKw1Wk-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="IsErr10G7rcVayq6A78a-1" source="y31tEONFL_qTeVTilAf7-0" target="cYXsOa2uhSyHparKw1Wk-0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="J0djFIw-iUX-w-i-Za1r-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shadow=0;labelBackgroundColor=none;endArrow=block;endFill=0;endSize=8;strokeWidth=1;fontSize=13;align=right;" edge="1" parent="IsErr10G7rcVayq6A78a-1" source="y31tEONFL_qTeVTilAf7-0" target="J0djFIw-iUX-w-i-Za1r-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="y31tEONFL_qTeVTilAf7-0" value="嗅到氣味" style="rhombus;whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;arcSize=35;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
+          <mxGeometry x="380" y="180" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Lqp8_Ku7zXwHwfA_hWRU-0" value="周圍八格是否有費洛蒙" style="html=1;verticalLabelPosition=middle;align=left;labelBackgroundColor=#ffffff;verticalAlign=middle;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.message;fontSize=13;flipH=1;labelPosition=center;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
+          <mxGeometry x="460" y="170" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cYXsOa2uhSyHparKw1Wk-0" value="隨機往前移動一步" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
+          <mxGeometry x="360" y="290" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="J0djFIw-iUX-w-i-Za1r-0" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
+          <mxGeometry x="430" y="260" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="J0djFIw-iUX-w-i-Za1r-1" value="隨機往前移動一步" style="whiteSpace=wrap;html=1;rounded=1;shadow=0;strokeWidth=1;glass=0;fontSize=13;" vertex="1" parent="IsErr10G7rcVayq6A78a-1">
+          <mxGeometry x="210" y="190" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
