@@ -17,4 +17,5 @@ class Button:
 
     def on_click(self, pos):
         if self.rect.collidepoint(pos):
+            print("call back is called")
             self.callback()

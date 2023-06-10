@@ -3,6 +3,7 @@ from Button import Button
 from Color import Color
 from Food import Food
 from Nest import Nest
+from Ant import Ant
 import random
 
 class SimulationModel:
@@ -30,11 +31,13 @@ class SimulationModel:
         self.ant_height = 10
         self.ant_count = 50
         self.max_steps = 100
+        self.ant_img = pygame.image.load("image/ant.png")
+        self.ant_img = pygame.transform.scale(self.ant_img, (self.ant_width, self.ant_height))
 
-    def reset(self):
-        # create object and location
 
-        # nest and food
+    def create_nest_and_food(self):
+
+        # create possible positions of nest and food
         max_width = self.nest_width if self.nest_width > self.food_width else self.food_width
         max_height = self.nest_height if self.nest_height > self.food_height else self.food_height
         w_count = self.panel_width // max_width
@@ -46,22 +49,36 @@ class SimulationModel:
                 possible_start_points.append((w * max_width, h * max_height))
         random.shuffle(possible_start_points)
 
-        # nest
+        # create nest
         x, y = possible_start_points.pop()
         self.nest = Nest(self.nest_img, pygame.Rect(x, y, self.nest_width, self.nest_height))
 
         self.foods.clear()
-        # food
+        # create food
         for i in range(self.food_num):
             x, y = possible_start_points.pop()
             self.foods.append(Food(self.food_img, pygame.Rect(x, y, self.food_width, self.food_height)))
 
-    def run_one_event(self):
-        # each ant move
-        pass
+    def reset(self):
+        # generate ant
+        self.create_nest_and_food()
+        self.create_ants()
+
+    # ant controller
+    def create_ants(self):
+        x, y = self.nest.rect.right , self.nest.rect.top
+        self.ants = [Ant(self.ant_img, pygame.Rect(x, y, self.ant_width, self.ant_height),self.nest)]
+
+    def run_event(self):
+        print("run_one_event called")
+        for ant in self.ants:
+            ant.move()
 
     def draw(self, surface):
         # nest
         self.nest.draw(surface)
         for food in self.foods:
             food.draw(surface)
+
+        for ant in self.ants:
+            ant.draw(surface)

@@ -1,3 +1,5 @@
+import time
+
 import pygame
 
 from Button import Button
@@ -6,6 +8,21 @@ from SimulationModel import SimulationModel
 
 pygame.init()
 pygame.display.set_caption('Ant Simulation')
+
+# button function
+start = False
+
+def start_and_stop():
+    global start
+
+    if start:
+        start_btn.change_image(start_img)
+        start = False
+        print("Simulation Stops")
+    else:
+        start_btn.change_image(stop_img)
+        start = True
+        print("Simulation Starts")
 
 # screen size
 main_area_width = 800
@@ -28,11 +45,11 @@ reset_btn = Button((0, 0), (80, 50), reset_img, the_model.reset)
 start_img = pygame.image.load("image/start.png")
 stop_img = pygame.image.load("image/stop.png")
 start_btn = Button((reset_btn.position[0] + reset_btn.size[0], 0),
-                   (80, 50), start_img, the_model.run_one_event())
+                   (80, 50), start_img, start_and_stop)
 
 # font
 myfont = pygame.font.SysFont('Comic Sans MS', 25)
-text_width, text_height = myfont.size("Collected Food: xxxxx")
+text_width, text_height = myfont.size("Collected Food: 0")
 text_rect = pygame.Rect(start_btn.rect.right + 5, start_btn.position[1] + 2,
                         text_width, text_height)
 text_surface = myfont.render("Collected Food: 0", False, (0, 0, 0))
@@ -50,6 +67,9 @@ if __name__ == '__main__':
                 reset_btn.on_click((relative_x, relative_y))
                 start_btn.on_click((relative_x, relative_y))
 
+        if start:
+            the_model.run_event()
+
         screen.fill(Color.WHITE)
         the_model.draw(main_area)
         pygame.draw.line(main_area, Color.SLATE_GREY, (0, main_area.get_height()),
@@ -58,3 +78,4 @@ if __name__ == '__main__':
         control_area.blit(reset_btn.image, reset_btn.rect)
         control_area.blit(text_surface, (text_rect.left, text_rect.top))
         pygame.display.flip()
+        pygame.time.delay(1000)
