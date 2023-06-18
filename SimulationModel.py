@@ -7,9 +7,14 @@ from Ant import Ant
 import random
 
 class SimulationModel:
-    def __init__(self, panel_width, panel_height):
-        self.panel_width = panel_width
-        self.panel_height = panel_height
+    def __init__(self, rect):
+        self.rect = rect
+        self.panel_width = self.rect.width
+        self.panel_height = self.rect.height
+
+        # background image
+        self.back_image = pygame.image.load("image/background.png")
+        self.back_image = pygame.transform.scale(self.back_image, (self.panel_width, self.panel_height))
 
         self.food_num = 5
         self.food_width = 50
@@ -31,7 +36,7 @@ class SimulationModel:
         self.ant_height = 10
         self.ant_count = 50
         self.max_steps = 100
-        self.ant_img = pygame.image.load("image/ant.png")
+        self.ant_img = pygame.image.load("image/ant1.png")
         self.ant_img = pygame.transform.scale(self.ant_img, (self.ant_width, self.ant_height))
 
 
@@ -75,6 +80,9 @@ class SimulationModel:
             ant.move()
 
     def draw(self, surface):
+        # background
+        surface.blit(self.back_image, self.rect)
+
         # nest
         self.nest.draw(surface)
         for food in self.foods:

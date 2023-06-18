@@ -8,6 +8,10 @@ class Element:
         self.rect = rect
         self.color = Color.BLUE
 
+    def change_image(self, image):
+        self.image = image
+        self.image = pygame.transform.scale(image, (self.rect.width,self.rect.height))
+
     def draw(self, surface):
        # pygame.draw.rect(screen, self.color, self.rect)
        surface.blit(self.image, self.rect)

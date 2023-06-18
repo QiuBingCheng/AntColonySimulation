@@ -34,7 +34,9 @@ control_area_height = 100
 screen = pygame.display.set_mode((main_area_width, main_area_height + control_area_height))
 main_area = pygame.Surface.subsurface(screen, (0, 0, main_area_width, main_area_height))
 control_area = pygame.Surface.subsurface(screen, (0, main_area_height, control_area_width, control_area_height))
-the_model = SimulationModel(main_area_width, main_area_height)
+
+main_rect = pygame.Rect(0, 0, main_area_width, main_area_height)
+the_model = SimulationModel(main_rect)
 the_model.reset()
 
 # reset
